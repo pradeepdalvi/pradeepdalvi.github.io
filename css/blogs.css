@@ -681,13 +681,13 @@ strong { font-weight: 500; color: var(--color-text-primary); }
 .closing-banner p {
     font-family: 'Playfair Display', serif;
     font-style: italic;
-    font-size: 1.8rem;
+    font-size: 1.4rem;
     color: var(--color-text-primary);
     margin-bottom: 0.5rem;
 }
 
 .closing-banner cite {
-    font-size: 14px;
+    font-size: 15px;
     color: var(--color-text-secondary);
     font-style: normal;
     font-family: 'DM Sans', sans-serif;
