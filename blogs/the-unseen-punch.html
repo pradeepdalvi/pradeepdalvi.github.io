@@ -124,11 +124,11 @@
 
   <p>Before we build solutions, we need to understand the mechanics of why the unseen blow hurts so much more than the telegraphed one. This is not intuition — it is reproducible physics, in the ring and in your stack.</p>
 
-  <h3 class="section-subheading">Surprise multiplies impact</h3>
+  <h3 class="section-subheading">Surprise - Impact is amplified</h3>
   <p>A strike that arrives without preparation bypasses defenses entirely. In cognitive terms, surprise interrupts existing routines, saturates working memory, and slows decision-making by 40–60%. In system terms, an unexpected failure mode skips your prepared mitigations and hits an unprepared fallback path — often a path that&rsquo;s never been exercised under load.</p>
 
-  <h3 class="section-subheading">Moderate force + perfect timing > maximum force + warning</h3>
-  <p>A moderately powerful punch timed when the target is unprepared outperforms a harder strike that&rsquo;s telegraphed and guarded. The same principle governs market disruptions, organisational pivots, and incident cascades. A slow memory leak that compounds quietly for six hours is more dangerous than a hard crash that pages the team in thirty seconds.</p>
+  <h3 class="section-subheading">Moderate force + Perfect timing > Maximum force + Warning</h3>
+  <p>A moderately powerful punch timed when the target is unprepared outperforms a harder strike that&rsquo;s telegraphed and guarded. The same principle governs market disruptions, organizational pivots, and incident cascades. A slow memory leak that compounds quietly for six hours is more dangerous than a hard crash that pages the team in thirty seconds.</p>
 
   <h3 class="section-subheading">Small, unnoticed problems compound</h3>
   <p>Repeated light hits accumulate. A 5% error rate no one watches, a latency percentile creeping week over week, a queue depth that&rsquo;s almost always fine — these are the jabs before the knockout. The system doesn&rsquo;t collapse at the first anomaly. It collapses when three anomalies coincide, each individually beneath the alert threshold, together catastrophic.</p>
@@ -152,7 +152,7 @@
   <p>Resilient systems do not stay up — they degrade usefully. A checkout flow that returns stale pricing data is better than one that 503s entirely. A recommendation service that returns trending defaults is better than one that times out and takes the product page with it. The leadership question is not "what do we do when this works?" but "what does the user experience when each dependency fails independently?"</p>
 
   <h3 class="section-subheading">Chaos engineering as sparring</h3>
-  <p>Mike Tyson didn&rsquo;t avoid punches in training — he practised getting hit. Controlled chaos — <code>Chaos Monkey</code>, synthetic traffic, game days, red team exercises — exposes your system to surprises in a low-stakes context. The goal is not to find bugs. It&rsquo;s to build the organisational muscle memory to respond. A team that has practiced a database failover three times this quarter will not freeze when it happens at 2 AM. A team that has only read the runbook will.</p>
+  <p>Mike Tyson didn&rsquo;t avoid punches in training — he practised getting hit. Controlled chaos — <code>Chaos Monkey</code>, synthetic traffic, game days, red team exercises — exposes your system to surprises in a low-stakes context. The goal is not to find bugs. It&rsquo;s to build the organizational muscle memory to respond. A team that has practiced a database failover three times this quarter will not freeze when it happens at 2 AM. A team that has only read the runbook will.</p>
 
   <h3 class="section-subheading">Adaptive skills over rigid scripts</h3>
   <p>Your runbook is a plan. It is useful when reality matches the runbook. When reality diverges — and it will — you need engineers with situational awareness, fast hypothesis formation, and comfort with partial information. The leadership investment is in those humans, not in the length of the runbook.</p>
@@ -215,7 +215,7 @@
   <p>SLO-based alerting — burning down your error budget faster than expected — is the most powerful form of early warning. It tells you the system is trending toward the user impact before the user has felt it yet. That is the difference between a close call and an incident.</p>
 
   <h3 class="section-subheading">Honest advisors as human observability</h3>
-  <p>Technical signals are incomplete without human signal. The engineer who noticed something odd three days ago but didn&rsquo;t raise it. The support ticket that was individually unremarkable but part of a pattern. The on-call who privately admits the runbook didn&rsquo;t match what they saw. Creating psychological safety for these signals to surface is observability at the organisational layer — and it requires the same deliberate investment as your tracing infrastructure.</p>
+  <p>Technical signals are incomplete without human signal. The engineer who noticed something odd three days ago but didn&rsquo;t raise it. The support ticket that was individually unremarkable but part of a pattern. The on-call who privately admits the runbook didn&rsquo;t match what they saw. Creating psychological safety for these signals to surface is observability at the organizational layer — and it requires the same deliberate investment as your tracing infrastructure.</p>
 
   <div class="callout">
     <div class="callout-head">Observability leadership questions</div>
@@ -238,7 +238,7 @@
 
   <p>Business continuity in distributed systems is not a disaster recovery document in a wiki that hasn&rsquo;t been tested since it was written. It is a practice — as regular and disciplined as the sparring sessions that build a fighter&rsquo;s recovery reflex. The goal is not to avoid the knock-down. The goal is to get up faster than your opponent expects.</p>
 
-  <h3 class="section-subheading">RTO and RPO as organisational commitments, not technical parameters</h3>
+  <h3 class="section-subheading">RTO and RPO as organizational commitments, not technical parameters</h3>
   <p><strong>Recovery Time Objective</strong> (RTO) — how long until the system is restored — and <strong>Recovery Point Objective</strong> (RPO) — how much data loss is tolerable — are fundamentally business commitments, not engineering metrics. A leader who treats them as engineering details has handed the hardest decision to the wrong person. These numbers must be set with the business, socialised with customers where relevant, and then validated through regular technical rehearsal.</p>
 
   <div class="matrix">
