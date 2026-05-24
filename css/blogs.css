@@ -503,7 +503,7 @@ body {
 }
 
 .section-num {
-    font-size: 21px;
+    font-size: 26px;
     font-weight: 500;
     color: var(--color-text-tertiary);
     text-transform: uppercase;
@@ -526,7 +526,7 @@ body {
 }
 
 .callout .callout-head {
-    font-size: 14px;
+    font-size: 16px;
     font-weight: 500;
     color: var(--color-text-success);
     text-transform: uppercase;
@@ -540,7 +540,7 @@ body {
 }
 
 .callout ul li {
-    font-size: 14px;
+    font-size: 15px;
     color: var(--color-text-secondary);
     padding: 4px 0 4px 1.2rem;
     position: relative;
@@ -564,23 +564,24 @@ body {
 }
 
 .stat-box {
-    background: var(--bg-card);
     border-radius: var(--border-radius-md);
+    border: 0.5px solid var(--color-border-warning);
+    background: var(--color-background-warning);
     padding: 1rem;
     text-align: center;
 }
 
 .stat-box .num {
-    font-family: var(--font-display);
-    font-size: 1.8rem;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 2rem;
     font-weight: 700;
-    color: var(--text);
+    color: var(--accent-red);
     display: block;
 }
 
 .stat-box .label {
-    font-size: 12px;
-    color: var(--color-text-tertiary);
+    font-size: 14px;
+    color: var(--color-text-secondary);
     margin-top: 2px;
 }
 
