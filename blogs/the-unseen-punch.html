@@ -50,7 +50,7 @@
 
     <p class="hero-deck">
       Mike Tyson said it plainly. Steve Jobs lived it. And every on-call engineer grinding late in the night knows it — the failure that hits hardest is the one you never saw coming.
-      I've experienced it myself as a perpetual on-call for many years. Here's a leadership paradigm for building systems, teams, and minds that absorb the blow and come back fighting.
+      I&rsquo;ve experienced it myself as a perpetual on-call for many years. Here&rsquo;s a leadership paradigm for building systems, teams, and minds that absorb the blow and come back fighting.
     </p>
 
     <div class="author-strip">
@@ -65,10 +65,29 @@
 
   <article class="article">
 
+    <div class="number-row">
+      <div class="stat-box">
+        <span class="num" style="color: var(--color-text-danger)">70%</span>
+        <span class="label">of outages stem from undetected gradual degradation, not hard failures</span>
+      </div>
+      <div class="stat-box">
+        <span class="num" style="color: var(--color-text-warning)">3x</span>
+        <span class="label">longer MTTR when the failure mode was not previously modeled</span>
+      </div>
+      <div class="stat-box">
+        <span class="num" style="color: var(--color-text-info-light)">40%</span>
+        <span class="label">of incidents are caused by changes, not by "steady-state" bugs</span>
+      </div>
+      <div class="stat-box">
+        <span class="num" style="color: var(--text)">2 AM</span>
+        <span class="label">the modal hour for high-severity pages — when cognitive bandwidth is lowest</span>
+      </div>
+    </div>
+
   <nav class="toc">
     <div class="toc-head">In this article</div>
     <ol>
-      <li><a href="#section1">The Punch You Don't See Coming</a></li>
+      <li><a href="#section1">The Punch You Don&rsquo;t See Coming</a></li>
       <li><a href="#section2">Why Surprise Is the Real System Killer</a></li>
       <li><a href="#section3">Pillar I — Resilient Architecture (Not Brittle Plans)</a></li>
       <li><a href="#section4">Pillar II — Observability as Peripheral Vision</a></li>
@@ -82,19 +101,20 @@
       <hr class="divider" />
   <!-- Section 1 -->
   <div class="section-accent"><span class="section-num" id="section1">01</span></div>
-      <h2 class="section-heading">The Punch You Don't See Coming</h2>
+      <h2 class="section-heading">The Punch You Don&rsquo;t See Coming</h2>
 
   <div class="pullquote">
     "Everyone has a plan until they get punched in the mouth." <cite>— Mike Tyson</cite>
   </div>
+      <img src="/images/boxing_640.jpg" alt="Boxing Arena" style="float: left;"/>
+      <p>In the boxing ring, the punch that ends the fight is rarely the hardest one. It&rsquo;s the one that arrives from the blind spot — the hook you didn&rsquo;t track, the counter you didn&rsquo;t expect, the moment your defence was committed elsewhere. The force matters far less than the timing and your state of readiness.</p>
 
-  <p>In the boxing ring, the punch that ends the fight is rarely the hardest one. It's the one that arrives from the blind spot — the hook you didn't track, the counter you didn't expect, the moment your defence was committed elsewhere. The force matters far less than the timing and your state of readiness.</p>
+      <p>Distributed systems fail the same way. The planned risks — the ones you rehearsed, load-tested, and run-booked — rarely kill you. It&rsquo;s the cascading timeout nobody modeled, the upstream dependency that silently degraded at 11 PM on a Friday, the config change deployed by an adjacent team that nobody told yours about. The unseen punch.</p>
 
-  <p>Distributed systems fail the same way. The planned risks — the ones you rehearsed, load-tested, and runbooked — rarely kill you. It's the cascading timeout nobody modeled, the upstream dependency that silently degraded at 11 PM on a Friday, the config change deployed by an adjacent team that nobody told yours about. The unseen punch.</p>
+      <br/><br/>
+      <p>Steve Jobs articulated the human parallel in his Stanford commencement address:</p> <p><em>"Sometimes life is gonna hit you with a brick in the head. Don&rsquo;t lose faith."</em></p> <p>And then he named the deepest gift of an unexpected blow — it strips away the heaviness of certainty and returns you to the lightness of a beginner. In system terms: your assumptions were wrong, your model was incomplete, and that&rsquo;s exactly the condition that produces the most learning.</p>
 
-      <p>Steve Jobs articulated the human parallel in his Stanford commencement address: <p><em>"Sometimes life is gonna hit you with a brick in the head. Don't lose faith."</em></p> And then he named the deepest gift of an unexpected blow — it strips away the heaviness of certainty and returns you to the lightness of a beginner. In system terms: your assumptions were wrong, your model was incomplete, and that's exactly the condition that produces the most learning.</p>
-
-  <p>This article is a leadership paradigm. It connects three domains — <strong>Resilient Architecture</strong>, <strong>Observability</strong>, and <strong>Business Continuity</strong> — through the single insight that the most dangerous failures are the ones you didn't model, and that the job of a systems leader is to shrink that invisible surface as fast as possible.</p>
+  <p>This article is a leadership paradigm. It connects three domains — <strong>Resilient Architecture</strong>, <strong>Observability</strong>, and <strong>Business Continuity</strong> — through the single insight that the most dangerous failures are the ones you didn&rsquo;t model, and that the job of a systems leader is to shrink that invisible surface as fast as possible.</p>
 
   <hr class="divider" />
 
@@ -105,32 +125,13 @@
   <p>Before we build solutions, we need to understand the mechanics of why the unseen blow hurts so much more than the telegraphed one. This is not intuition — it is reproducible physics, in the ring and in your stack.</p>
 
   <h3 class="section-subheading">Surprise multiplies impact</h3>
-  <p>A strike that arrives without preparation bypasses defenses entirely. In cognitive terms, surprise interrupts existing routines, saturates working memory, and slows decision-making by 40–60%. In system terms, an unexpected failure mode skips your prepared mitigations and hits an unprepared fallback path — often a path that's never been exercised under load.</p>
+  <p>A strike that arrives without preparation bypasses defenses entirely. In cognitive terms, surprise interrupts existing routines, saturates working memory, and slows decision-making by 40–60%. In system terms, an unexpected failure mode skips your prepared mitigations and hits an unprepared fallback path — often a path that&rsquo;s never been exercised under load.</p>
 
   <h3 class="section-subheading">Moderate force + perfect timing > maximum force + warning</h3>
-  <p>A moderately powerful punch timed when the target is unprepared outperforms a harder strike that's telegraphed and guarded. The same principle governs market disruptions, organisational pivots, and incident cascades. A slow memory leak that compounds quietly for six hours is more dangerous than a hard crash that pages the team in thirty seconds.</p>
+  <p>A moderately powerful punch timed when the target is unprepared outperforms a harder strike that&rsquo;s telegraphed and guarded. The same principle governs market disruptions, organisational pivots, and incident cascades. A slow memory leak that compounds quietly for six hours is more dangerous than a hard crash that pages the team in thirty seconds.</p>
 
   <h3 class="section-subheading">Small, unnoticed problems compound</h3>
-  <p>Repeated light hits accumulate. A 5% error rate no one watches, a latency percentile creeping week over week, a queue depth that's almost always fine — these are the jabs before the knockout. The system doesn't collapse at the first anomaly. It collapses when three anomalies coincide, each individually beneath the alert threshold, together catastrophic.</p>
-
-  <div class="number-row">
-    <div class="stat-box">
-      <span class="num">70%</span>
-      <span class="label">of outages stem from undetected gradual degradation, not hard failures</span>
-    </div>
-    <div class="stat-box">
-      <span class="num">3x</span>
-      <span class="label">longer MTTR when the failure mode was not previously modeled</span>
-    </div>
-    <div class="stat-box">
-      <span class="num">40%</span>
-      <span class="label">of incidents are caused by changes, not by "steady-state" bugs</span>
-    </div>
-    <div class="stat-box">
-      <span class="num">2 AM</span>
-      <span class="label">the modal hour for high-severity pages — when cognitive bandwidth is lowest</span>
-    </div>
-  </div>
+  <p>Repeated light hits accumulate. A 5% error rate no one watches, a latency percentile creeping week over week, a queue depth that&rsquo;s almost always fine — these are the jabs before the knockout. The system doesn&rsquo;t collapse at the first anomaly. It collapses when three anomalies coincide, each individually beneath the alert threshold, together catastrophic.</p>
 
   <hr class="divider" />
 
@@ -145,13 +146,13 @@
 
   <p>The first leadership error is confusing a <strong>plan</strong> with <strong>resilience</strong>. Plans are rigid narratives about how the future will unfold. Resilient architectures are adaptive systems that survive the future even when it ignores the plan entirely.</p>
 
-  <p>In a distributed system, brittleness looks like: a service that's been load-tested but only along the happy path; a retry strategy that assumes the downstream will eventually recover; a monolithic deployment with no circuit breakers because "we've never had that kind of failure." Each assumption is a telegraphed punch — you know it's coming, so you prepared for it. The unkind punch comes from somewhere else.</p>
+  <p>In a distributed system, brittleness looks like: a service that&rsquo;s been load-tested but only along the happy path; a retry strategy that assumes the downstream will eventually recover; a monolithic deployment with no circuit breakers because "we&rsquo;ve never had that kind of failure." Each assumption is a telegraphed punch — you know it&rsquo;s coming, so you prepared for it. The unkind punch comes from somewhere else.</p>
 
   <h3 class="section-subheading">Design for graceful degradation, not heroic availability</h3>
   <p>Resilient systems do not stay up — they degrade usefully. A checkout flow that returns stale pricing data is better than one that 503s entirely. A recommendation service that returns trending defaults is better than one that times out and takes the product page with it. The leadership question is not "what do we do when this works?" but "what does the user experience when each dependency fails independently?"</p>
 
   <h3 class="section-subheading">Chaos engineering as sparring</h3>
-  <p>Mike Tyson didn't avoid punches in training — he practised getting hit. Controlled chaos — <code>Chaos Monkey</code>, synthetic traffic, game days, red team exercises — exposes your system to surprises in a low-stakes context. The goal is not to find bugs. It's to build the organisational muscle memory to respond. A team that has practiced a database failover three times this quarter will not freeze when it happens at 2 AM. A team that has only read the runbook will.</p>
+  <p>Mike Tyson didn&rsquo;t avoid punches in training — he practised getting hit. Controlled chaos — <code>Chaos Monkey</code>, synthetic traffic, game days, red team exercises — exposes your system to surprises in a low-stakes context. The goal is not to find bugs. It&rsquo;s to build the organisational muscle memory to respond. A team that has practiced a database failover three times this quarter will not freeze when it happens at 2 AM. A team that has only read the runbook will.</p>
 
   <h3 class="section-subheading">Adaptive skills over rigid scripts</h3>
   <p>Your runbook is a plan. It is useful when reality matches the runbook. When reality diverges — and it will — you need engineers with situational awareness, fast hypothesis formation, and comfort with partial information. The leadership investment is in those humans, not in the length of the runbook.</p>
@@ -162,7 +163,7 @@
       <li>Every dependency has an explicit failure mode and a tested fallback</li>
       <li>Circuit breakers are deployed and configured with real production thresholds, not defaults</li>
       <li>Timeouts are set intentionally on every network call — no implicit infinity</li>
-      <li>Bulkhead patterns isolate critical paths from noisy neighbours</li>
+      <li>Bulkhead patterns isolate critical paths from noisy neighbors</li>
       <li>Game days occur on a cadence, not only after incidents</li>
       <li>Degraded-mode UX is designed alongside the happy path — not as an afterthought</li>
       <li>Blast radius of any single deployment is bounded by feature flags or canary routing</li>
@@ -175,9 +176,9 @@
   <div class="section-accent"><span class="section-num" id="section4">04</span></div>
       <h2 class="section-heading">Pillar II — Observability: Invest in Peripheral Vision</h2>
 
-  <p>The unseen punch is only unseen until you build the right field of view. Observability is the organisational practice of making the invisible visible — before it lands.</p>
+  <p>The unseen punch is only unseen until you build the right field of view. Observability is the organizational practice of making the invisible visible — before it lands.</p>
 
-  <p>There is a critical distinction between <strong>monitoring</strong> and <strong>observability</strong> that leaders often collapse. Monitoring tells you when a known thing has broken. Observability allows you to ask novel questions about unknown failure states. In boxing terms: monitoring is knowing your guard is down. Observability is noticing the micro-shift in your opponent's shoulder that predicts the left hook that hasn't left yet.</p>
+  <p>There is a critical distinction between <strong>monitoring</strong> and <strong>observability</strong> that leaders often collapse. Monitoring tells you when a known thing has broken. Observability allows you to ask novel questions about unknown failure states. In boxing terms: monitoring is knowing your guard is down. Observability is noticing the micro-shift in your opponent&rsquo;s shoulder that predicts the left hook that hasn&rsquo;t left yet.</p>
 
   <h3 class="section-subheading">Three pillars of observability (and their leadership translations)</h3>
 
@@ -214,7 +215,7 @@
   <p>SLO-based alerting — burning down your error budget faster than expected — is the most powerful form of early warning. It tells you the system is trending toward the user impact before the user has felt it yet. That is the difference between a close call and an incident.</p>
 
   <h3 class="section-subheading">Honest advisors as human observability</h3>
-  <p>Technical signals are incomplete without human signal. The engineer who noticed something odd three days ago but didn't raise it. The support ticket that was individually unremarkable but part of a pattern. The on-call who privately admits the runbook didn't match what they saw. Creating psychological safety for these signals to surface is observability at the organisational layer — and it requires the same deliberate investment as your tracing infrastructure.</p>
+  <p>Technical signals are incomplete without human signal. The engineer who noticed something odd three days ago but didn&rsquo;t raise it. The support ticket that was individually unremarkable but part of a pattern. The on-call who privately admits the runbook didn&rsquo;t match what they saw. Creating psychological safety for these signals to surface is observability at the organisational layer — and it requires the same deliberate investment as your tracing infrastructure.</p>
 
   <div class="callout">
     <div class="callout-head">Observability leadership questions</div>
@@ -222,7 +223,7 @@
       <li>Can an engineer ask a new question about a failure without a code deployment?</li>
       <li>Are your SLIs defined from the user journey, or from the infrastructure boundary?</li>
       <li>Is your alerting catching leading indicators or only outcomes?</li>
-      <li>Does every on-call rotation end with a "what almost happened but didn't" review?</li>
+      <li>Does every on-call rotation end with a "what almost happened but didn&rsquo;t" review?</li>
       <li>Are near-misses treated as high-signal events, not as non-events?</li>
     </ul>
   </div>
@@ -235,7 +236,7 @@
 
   <p>Prevention is not a strategy. Prevention is a hope. The complete leadership posture assumes failure will occur, plans for recovery as rigorously as it plans for prevention, and measures both.</p>
 
-  <p>Business continuity in distributed systems is not a disaster recovery document in a wiki that hasn't been tested since it was written. It is a practice — as regular and disciplined as the sparring sessions that build a fighter's recovery reflex. The goal is not to avoid the knock-down. The goal is to get up faster than your opponent expects.</p>
+  <p>Business continuity in distributed systems is not a disaster recovery document in a wiki that hasn&rsquo;t been tested since it was written. It is a practice — as regular and disciplined as the sparring sessions that build a fighter&rsquo;s recovery reflex. The goal is not to avoid the knock-down. The goal is to get up faster than your opponent expects.</p>
 
   <h3 class="section-subheading">RTO and RPO as organisational commitments, not technical parameters</h3>
   <p><strong>Recovery Time Objective</strong> (RTO) — how long until the system is restored — and <strong>Recovery Point Objective</strong> (RPO) — how much data loss is tolerable — are fundamentally business commitments, not engineering metrics. A leader who treats them as engineering details has handed the hardest decision to the wrong person. These numbers must be set with the business, socialised with customers where relevant, and then validated through regular technical rehearsal.</p>
@@ -273,7 +274,7 @@
   <p>Effective continuity rehearsal includes: <strong>actual failover</strong> to standby infrastructure (not simulation), <strong>data recovery validation</strong> (not just backup confirmation), and <strong>communication pathway drills</strong> — who calls whom, with what escalation, at what severity threshold. The human paths fail as often as the technical ones.</p>
 
   <h3 class="section-subheading">Near-miss culture as compound learning</h3>
-  <p>Every near-miss is a gift. It is the punch that didn't land, and it carries complete information about where your defence was weak. Leaders who treat near-misses as non-events waste their highest-quality free data. Leaders who build a ritual around them — structured post-mortems, blameless near-miss reviews, explicit tracking of "close calls" — create compounding learning that systematically shrinks the blind spot surface over time.</p>
+  <p>Every near-miss is a gift. It is the punch that didn&rsquo;t land, and it carries complete information about where your defence was weak. Leaders who treat near-misses as non-events waste their highest-quality free data. Leaders who build a ritual around them — structured post-mortems, blameless near-miss reviews, explicit tracking of "close calls" — create compounding learning that systematically shrinks the blind spot surface over time.</p>
 
   <div class="callout">
     <div class="callout-head">Business continuity maturity indicators</div>
@@ -295,7 +296,7 @@
 
   <p>Technical systems reflect the leadership culture that builds them. A team that is psychologically unsafe will not surface near-misses. A team that is blamed for incidents will hide failures until they become crises. A team that has never practiced failure will freeze when it arrives.</p>
 
-  <p>The leadership posture that produces resilient, observable, recoverable systems has four properties:</p>
+  <p>The leadership posture that produces resilient, observable, recoverable systems has five properties:</p>
 
   <div class="pillar-grid">
     <div class="pillar-card">
@@ -346,15 +347,17 @@
     </ul>
   </div>
 
-  <p>The goal is not a system that never fails. That system doesn't exist. The goal is a system — and a team, and a leadership posture — where unexpected blows cause inconvenience instead of collapse. Where the knockout is always just a little further out of reach than your opponent planned.</p>
+  <p>The goal is not a system that never fails. That system doesn&rsquo;t exist. The goal is a system — and a team, and a leadership posture — where unexpected blows cause inconvenience instead of collapse. Where the knockout is always just a little further out of reach than your opponent planned.</p>
 
   <div class="closing-banner">
     <p>"Life is what happens when you are busy making other plans."</p>
-    <cite>— John Lennon (popularized); the principle applies equally to distributed systems</cite>
+    <cite>&mdash; Allen Saunders, popularized by John Lennon in <em>Beautiful Boy</em> (1980).</cite>
+    <br/>
+    <i style="color: var(--text); font-size: 22px;">The principle applies equally to distributed systems.</i>
   </div>
 
       <div class="closing-section">
-        <p>If you work on linux systems software, networking domain, fintech infrastructure, or distributed systems at scale — I'd love to connect. The conversation is always more interesting than the metrics.</p>
+        <p>If you lead engineering teams, design distributed systems at scale, or find yourself thinking about failure the way this piece does — I&rsquo;d love to connect. The conversation is always more interesting than the metrics.</p>
         <p style="font-style:normal; font-size:14px; color: #555550; font-family: 'DM Mono', monospace;">linkedin.com/in/pradeep &nbsp;·&nbsp; Pune, India</p>
       </div>
 </div>
