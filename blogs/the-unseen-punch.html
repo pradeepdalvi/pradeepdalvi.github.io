@@ -63,27 +63,28 @@
     </div>
   </section>
 
-  <article class="article">
-
-    <div class="number-row">
-      <div class="stat-box">
-        <span class="num" style="color: var(--color-text-danger)">70%</span>
+  <section class="stats-bar">
+    <div class="stats-grid">
+      <div class="stats-cell">
+        <span class="num danger">70%</span>
         <span class="label">of outages stem from undetected gradual degradation, not hard failures</span>
       </div>
-      <div class="stat-box">
-        <span class="num" style="color: var(--color-text-warning)">3x</span>
+      <div class="stats-cell">
+        <span class="num warning">3x</span>
         <span class="label">longer MTTR when the failure mode was not previously modeled</span>
       </div>
-      <div class="stat-box">
-        <span class="num" style="color: var(--color-text-info-light)">40%</span>
+      <div class="stats-cell">
+        <span class="num info">40%</span>
         <span class="label">of incidents are caused by changes, not by "steady-state" bugs</span>
       </div>
-      <div class="stat-box">
-        <span class="num" style="color: var(--text)">2 AM</span>
+      <div class="stats-cell">
+        <span class="num info-light">2 AM</span>
         <span class="label">the modal hour for high-severity pages — when cognitive bandwidth is lowest</span>
       </div>
     </div>
+  </section>
 
+  <article class="article">
   <nav class="toc">
     <div class="toc-head">In this article</div>
     <ol>
@@ -104,7 +105,7 @@
       <h2 class="section-heading">The Punch You Don&rsquo;t See Coming</h2>
 
   <div class="pullquote">
-    "Everyone has a plan until they get punched in the mouth." <cite>— Mike Tyson</cite>
+    &ldquo;Everyone has a plan until they get punched in the mouth.&rdquo; <cite>— Mike Tyson</cite>
   </div>
       <img src="/images/boxing_640.jpg" alt="Boxing Arena" style="float: left;"/>
       <p>In the boxing ring, the punch that ends the fight is rarely the hardest one. It&rsquo;s the one that arrives from the blind spot — the hook you didn&rsquo;t track, the counter you didn&rsquo;t expect, the moment your defence was committed elsewhere. The force matters far less than the timing and your state of readiness.</p>
@@ -112,7 +113,7 @@
       <p>Distributed systems fail the same way. The planned risks — the ones you rehearsed, load-tested, and run-booked — rarely kill you. It&rsquo;s the cascading timeout nobody modeled, the upstream dependency that silently degraded at 11 PM on a Friday, the config change deployed by an adjacent team that nobody told yours about. The unseen punch.</p>
 
       <br/><br/>
-      <p>Steve Jobs articulated the human parallel in his Stanford commencement address:</p> <p><em>"Sometimes life is gonna hit you with a brick in the head. Don&rsquo;t lose faith."</em></p> <p>And then he named the deepest gift of an unexpected blow — it strips away the heaviness of certainty and returns you to the lightness of a beginner. In system terms: your assumptions were wrong, your model was incomplete, and that&rsquo;s exactly the condition that produces the most learning.</p>
+      <p>Steve Jobs articulated the human parallel in his Stanford commencement address:</p> <p><em>&ldquo;Sometimes life is gonna hit you with a brick in the head. Don&rsquo;t lose faith.&rdquo;</em></p> <p>And then he named the deepest gift of an unexpected blow — it strips away the heaviness of certainty and returns you to the lightness of a beginner. In system terms: your assumptions were wrong, your model was incomplete, and that&rsquo;s exactly the condition that produces the most learning.</p>
 
   <p>This article is a leadership paradigm. It connects three domains — <strong>Resilient Architecture</strong>, <strong>Observability</strong>, and <strong>Business Continuity</strong> — through the single insight that the most dangerous failures are the ones you didn&rsquo;t model, and that the job of a systems leader is to shrink that invisible surface as fast as possible.</p>
 
@@ -140,7 +141,7 @@
       <h2 class="section-heading">Pillar I — Resilient Architecture: Build Routines, Not Brittle Plans</h2>
 
   <div class="pullquote">
-    <p>"The heaviness of being successful was replaced by the lightness of being a beginner again."</p>
+    <p>&ldquo;The heaviness of being successful was replaced by the lightness of being a beginner again.&rdquo;</p>
     <cite>— Steve Jobs, Stanford Commencement Address, 2005</cite>
   </div>
 
@@ -350,7 +351,7 @@
   <p>The goal is not a system that never fails. That system doesn&rsquo;t exist. The goal is a system — and a team, and a leadership posture — where unexpected blows cause inconvenience instead of collapse. Where the knockout is always just a little further out of reach than your opponent planned.</p>
 
   <div class="closing-banner">
-    <p>"Life is what happens when you are busy making other plans."</p>
+    <p>&ldquo;Life is what happens when you are busy making other plans.&rdquo;</p>
     <cite>&mdash; Allen Saunders, popularized by John Lennon in <em>Beautiful Boy</em> (1980).</cite>
     <br/>
     <span style="font-size: 22px; color: var(--color-text-warning);">The principle applies equally to distributed systems.</span>
