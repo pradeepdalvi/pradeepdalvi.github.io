@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="/css/blogs.css">
+  <link rel="icon" type="image/x-icon" href="/favicon.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="48x48" href="/favicon-48x48.png">
+  <link rel="manifest" href="/manifest.webmanifest" crossOrigin="use-credentials">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="theme-color" content="#fff">
+  <meta name="application-name" content="Pradeep A. Dalvi">
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon-180x180.png">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Pradeep A. Dalvi">
+  <title>Being OnCall | Blogs — Pradeep A. Dalvi</title>
+
+</head>
+<body>
+
+<header class="site-header">
+  <div class="header-inner">
+    <a href="/index" class="site-name">Pradeep A. Dalvi</a>
+    <nav class="header-links">
+      <a href="/blogs/">Blogs</a>
+      <a href="/about">About</a>
+    </nav>
+  </div>
+</header>
+<main>
+  <section class="hero">
+    <div class="hero-tags">
+      <span class="tag tag-payments">Software Maintenance</span>
+      <span class="tag tag-arch">OnCall</span>
+      <span class="tag tag-resilience">Engineering Culture</span>
+      <span class="tag-sep">·</span>
+      <span class="tag-date">May 2026</span>
+    </div>
+
+    <h1 class="hero-title">Being OnCall.<br>
+      <em>Expect the unexpected,<br>
+        while hoping for none.</em></h1>
+
+    <p class="hero-deck">
+      OnCall is one of the most critical, most adhoc, and most underappreciated functions
+      in software engineering. This is an attempt to put structure around it &mdash; not to make
+      it rigid, but to make it survivable. These are two cents from someone who has lived it.
+      I hope they narrow, even slightly, how you think about OnCall responsibilities.
+    </p>
+
+    <div class="author-strip">
+      <div class="avatar">PD</div>
+      <div>
+        <div class="author-name">Pradeep A. Dalvi</div>
+        <div class="author-role">Computer Engineer · Distributed Systems &amp; Payments</div>
+      </div>
+      <span class="read-time">11 min read</span>
+    </div>
+  </section>
+
+  <section class="stats-bar">
+    <div class="stats-grid">
+      <div class="stats-cell">
+        <span class="num warning">24/7</span>
+        <span class="label">Systems don&rsquo;t observe business hours. Neither do the failures.</span>
+      </div>
+      <div class="stats-cell">
+        <span class="num success">1st</span>
+        <span class="label">Line of defence against production incidents &mdash; that&rsquo;s you, the OnCall engineer</span>
+      </div>
+      <div class="stats-cell">
+        <span class="num info">BAU</span>
+        <span class="label">The baseline you must know cold before you can recognise what isn&rsquo;t it</span>
+      </div>
+      <div class="stats-cell">
+        <span class="num danger">0</span>
+        <span class="label">Times it is acceptable to skip a successful handover</span>
+      </div>
+    </div>
+  </section>
+
+  <article class="article">
+  <nav class="toc">
+    <div class="toc-head">In this article</div>
+    <ol>
+      <li><a href="#section1">What OnCall Actually Is</a></li>
+      <li><a href="#section2">The Daily Checklist</a></li>
+      <li><a href="#section3">BAU Activities</a></li>
+      <li><a href="#section4">Anomalies</a></li>
+      <li><a href="#section5">Unanticipated Issues &amp; Mitigation</a></li>
+      <li><a href="#section6">Tech Debt &amp; Improving Observability</a></li>
+      <li><a href="#section7">The Handover</a></li>
+    </ol>
+  </nav>
+
+  <div class="prose">
+
+    <hr class="divider" />
+    <!-- Section 1 -->
+    <div class="section-accent"><span class="section-num" id="section1">01</span></div>
+    <h2 class="section-heading">What OnCall Actually Is</h2>
+
+    <p>
+      OnCall accounts for one of the most critical functions in ensuring BAU activities continue
+      uninterrupted. It provides direct, unfiltered observability into the systems you work on &mdash;
+      the kind that design documents and code reviews simply cannot replicate. It surfaces
+      unanticipated gaps in well-designed, well-developed systems that only reveal themselves
+      at scale and over time.
+    </p>
+
+    <p>
+      And yet it is one of the lesser appreciated, sometimes highly neglected activities
+      among engineers &mdash; crowded out by the chase for new features and greenfield development,
+      while the ever-changing factors of time and scale quietly accumulate risk.
+      Outdating hardware. Growing tech debt. Increasing volume. These do not file tickets.
+      They wait for OnCall to meet them.
+    </p>
+
+    <div class="pullquote">
+      <p>&ldquo;OnCall is the window when one has to be mentally prepared to expect the unexpected,<br/>
+      while deep down hoping it to be uneventful.&rdquo;</p>
+    </div>
+
+    <p>
+      The gap between <em>expecting the unexpected</em> and being unprepared for it is what
+      this article tries to close. It is not a rigid prescription &mdash; it is a skeleton.
+      You will add flesh to it from your own systems, your own stack, your own hard-won BAU baselines.
+    </p>
+
+      <hr class="divider" />
+
+    <!-- Section 2 -->
+    <div class="section-accent"><span class="section-num" id="section2">02</span></div>
+    <h2 class="section-heading">The Daily Checklist</h2>
+
+    <p>
+      The checklist is not a form you fill when you go OnCall. It is a living document you maintain
+      whether you are OnCall or not &mdash; built incrementally, continuously calibrated against
+      what you have seen and what others have learned the hard way.
+    </p>
+
+    <p class="step-label">Four principles for a checklist that actually works</p>
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-body">
+          <span class="step-title">build it before you need it</span>
+          <p class="step-desc">Prepare the checklist of systems you are responsible for and keep
+          adding metrics over time, whether you are OnCall or not.
+          <strong>A checklist written during an incident is a wish list, not a tool.</strong></p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-body">
+          <span class="step-title">learn from others&rsquo; incidents</span>
+          <p class="step-desc">Every post-mortem &mdash; yours or another team&rsquo;s &mdash; is a free lesson
+          in what your checklist is missing. Improve it periodically, not just after your own misses.
+          <strong>Borrowed experience is cheaper than earned pain.</strong></p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <div class="step-body">
+          <span class="step-title">always choose to fall forward</span>
+          <p class="step-desc">Learn to identify gaps quickly and provide immediate mitigation
+          over rollback. Rollback is not always the safest or fastest path.
+          <strong>Forward mitigation with eyes open beats blind reversal.</strong></p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">4</div>
+        <div class="step-body">
+          <span class="step-title">divide metrics into focused areas</span>
+          <p class="step-desc">Most metrics will fall into one or more of four buckets.
+          Structure your checklist around them &mdash; not by system, but by what the metric
+          <strong>means</strong> when it moves.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="metric-grid">
+      <div class="metric-card">
+        <div class="metric-badge">01 / tech</div>
+        <h4>Tech Metrics</h4>
+        <p>Error rates, latency percentiles, queue depths, cache hit ratios, resource saturation. The health of the infrastructure beneath everything else.</p>
+      </div>
+      <div class="metric-card">
+        <div class="metric-badge">02 / business</div>
+        <h4>Business Metrics</h4>
+        <p>Transaction success rates, conversion, throughput of critical user flows. Where engineering health translates directly into customer experience and revenue.</p>
+      </div>
+      <div class="metric-card">
+        <div class="metric-badge">03 / growth</div>
+        <h4>Growth Metrics</h4>
+        <p>Volume trends, scale headroom, capacity runway. The signals that tell you whether today&rsquo;s system can handle next month&rsquo;s load.</p>
+      </div>
+      <div class="metric-card">
+        <div class="metric-badge">04 / compliance</div>
+        <h4>Compliance Metrics</h4>
+        <p>Regulatory SLAs, audit trail completeness, data retention adherence. Non-negotiable, and rarely loud until they are already in breach.</p>
+      </div>
+    </div>
+
+      <hr class="divider" />
+
+    <!-- Section 3 -->
+    <div class="section-accent"><span class="section-num" id="section3">03</span></div>
+    <h2 class="section-heading">BAU Activities</h2>
+
+    <p>
+      BAU &mdash; Business As Usual &mdash; is not background noise. It is the baseline that everything
+      else is measured against. OnCall&rsquo;s first responsibility is to ensure BAU runs,
+      runs correctly, and runs on time. This means owning three categories of routine work:
+    </p>
+
+    <div class="options-grid">
+      <div class="option-card active">
+        <div class="option-badge primary">tech jobs</div>
+        <div class="option-title">Periodic Tech Jobs</div>
+        <p class="option-body">
+          Reconciliations, workflow terminal state management, data consistency checks, scheduled
+          maintenance tasks. These are not glamorous. They are, however,
+          <strong>completely non-negotiable from the customer experience point of view</strong>.
+          Periodic tech jobs build trust with customers, maintain end-user relationships, and
+          effectively build the brand over time. Taking them lightly is completely disastrous
+          in the long term &mdash; the damage accumulates invisibly until it becomes visible
+          all at once, and usually at the worst possible moment.
+        </p>
+      </div>
+      <div class="option-card">
+        <div class="option-badge cat">business jobs</div>
+        <div class="option-title">Business-Related Jobs</div>
+        <p class="option-body">
+          Reporting pipelines, SLA-bound processing windows, partner and vendor reconciliations.
+          These tie your systems&rsquo; runtime behaviour directly to commercial commitments.
+          <strong>Failures here are felt by people outside engineering before anyone files a ticket.</strong>
+        </p>
+      </div>
+      <div class="option-card">
+        <div class="option-badge cat">compliance jobs</div>
+        <div class="option-title">Compliance-Related Jobs</div>
+        <p class="option-body">
+          Regulatory reporting, audit log completeness, data lifecycle enforcement.
+          <strong>These run on external clocks, not engineering ones.</strong>
+          A missed compliance window does not have a mitigation path. It has a regulator.
+        </p>
+      </div>
+    </div>
+
+    <div class="callout" style="border: none; border-left: 2px solid var(--color-border-success-broad);">
+      <div class="callout-head">The BAU principle</div>
+      <p>
+        <i>You cannot detect an anomaly until you know what normal looks like.
+        Owning BAU is not a lesser task than responding to incidents.
+        It is the precondition for recognising them.</i>
+      </p>
+    </div>
+
+      <hr class="divider" />
+
+    <!-- Section 4 -->
+    <div class="section-accent"><span class="section-num" id="section4">04</span></div>
+    <h2 class="section-heading">Anomalies</h2>
+
+    <div class="defn-block">
+      <span class="defn-label">anomaly, n.</span>
+      <div class="defn-body">
+        Something that deviates from what is <strong>standard, normal, or expected</strong>.
+        To detect or accept something as an anomaly, one must first have in-depth understanding
+        of what BAU looks like. Hence it is very important to understand the first two
+        responsibilities very clearly before engaging with this one.
+      </div>
+    </div>
+
+    <p>
+      Anomalies arrive in the same three categories as BAU &mdash; because that is where
+      normal lives, and where deviations from it first become visible.
+    </p>
+
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">T</div>
+        <div class="step-body">
+          <span class="step-title">tech anomalies</span>
+          <p class="step-desc">Unexpected error rate spikes, latency shifts, resource saturation events,
+          job failures, dependency degradation. <strong>Often the first signal, because the system
+          always tells you before the customer does &mdash; if you are watching.</strong></p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">B</div>
+        <div class="step-body">
+          <span class="step-title">business anomalies</span>
+          <p class="step-desc">Transaction success rates outside historical range, throughput drops,
+          processing delays that breach SLAs. <strong>These are where tech anomalies become
+          customer-visible.</strong> The gap between T and B is your detection window.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">C</div>
+        <div class="step-body">
+          <span class="step-title">compliance anomalies</span>
+          <p class="step-desc">Regulatory reporting gaps, audit trail holes, retention breaches.
+          <strong>The most expensive anomalies to resolve after the fact.</strong>
+          Preventable almost entirely through consistent BAU monitoring.</p>
+        </div>
+      </div>
+    </div>
+
+    <p>
+      The most effective anomaly detection is not reactive alerting &mdash; it is the accumulated
+      intuition of an engineer who knows their system&rsquo;s normal so well that something off
+      feels wrong before the alert fires. That intuition is built through BAU ownership,
+      not through incident response alone.
+    </p>
+
+    <div class="callout">
+      <div class="callout-head">Questions to ask when something looks anomalous</div>
+      <ul>
+        <li>Is this a deviation from normal, or is my normal baseline stale?</li>
+        <li>When did this start? Is there a correlated deployment, config change, or traffic event?</li>
+        <li>Is this isolated to one system, or spreading across a dependency boundary?</li>
+        <li>Is the impact currently tech-only, or has it reached business or compliance metrics?</li>
+        <li>Has this pattern appeared before? Is there a prior post-mortem or runbook entry?</li>
+        <li>What is the blast radius if this continues for another 30 minutes without intervention?</li>
+      </ul>
+    </div>
+
+      <hr class="divider" />
+
+    <!-- Section 5 -->
+    <div class="section-accent"><span class="section-num" id="section5">05</span></div>
+    <h2 class="section-heading">Unanticipated Issues &amp; Mitigation</h2>
+
+    <p>
+      Even with a complete checklist, a deep BAU baseline, and sharp anomaly detection &mdash;
+      the unanticipated still arrives. That is the definition of OnCall. The goal is not to
+      eliminate surprise. It is to reduce the time between surprise and controlled response.
+    </p>
+
+    <p class="step-label">Mitigation sequence &mdash; from first signal to resolution</p>
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-body">
+          <span class="step-title">detect &amp; triage</span>
+          <p class="step-desc">Confirm the signal is real, not a monitoring artefact. Establish
+          impact scope immediately: is this tech-only, business-impacting, or compliance-touching?
+          <strong>The triage answer determines everything that follows.</strong></p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-body">
+          <span class="step-title">communicate early</span>
+          <p class="step-desc">Notify stakeholders at the start of investigation, not after resolution.
+          A short, factual early message &mdash; <em>&ldquo;investigating an anomaly in X, impact Y, update in Z mins&rdquo;</em>
+          &mdash; <strong>costs thirty seconds and prevents thirty minutes of escalation noise.</strong></p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <div class="step-body">
+          <span class="step-title">immediate mitigation over rollback</span>
+          <p class="step-desc">Identify the fastest path to a stable state. This is frequently
+          not a rollback. Always choose to fall forward &mdash; a targeted mitigation with
+          known trade-offs <strong>beats an untested rollback that may introduce new unknowns.</strong></p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">4</div>
+        <div class="step-body">
+          <span class="step-title">drive the team, not just the ticket</span>
+          <p class="step-desc">OnCall&rsquo;s primary responsibility during an incident is not to fix
+          everything alone. It is to be the primary point of contact and to
+          <strong>drive the team toward immediate mitigation steps</strong> &mdash;
+          assigning, unblocking, and keeping the thread moving.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">5</div>
+        <div class="step-body">
+          <span class="step-title">document action items before closing</span>
+          <p class="step-desc">Every unanticipated issue leaves behind pending action items:
+          permanent fixes, runbook updates, alerting improvements, tech debt logged.
+          <strong>Closing an incident without capturing these is how the same issue
+          becomes next rotation&rsquo;s problem.</strong></p>
+        </div>
+      </div>
+    </div>
+
+      <hr class="divider" />
+
+    <!-- Section 6 -->
+    <div class="section-accent"><span class="section-num" id="section6">06</span></div>
+    <h2 class="section-heading">Tech Debt &amp; Improving Observability</h2>
+
+    <p>
+      OnCall is the best source of signal on where your system is quietly accumulating debt.
+      Not the kind that shows up in a sprint retro &mdash; the kind that only reveals itself under
+      load, at 3 AM, on a Friday. Every unanticipated issue is an X-ray of a place where
+      the system&rsquo;s design assumptions no longer match reality.
+    </p>
+
+    <h3>Tech debt surfaced by OnCall</h3>
+    <p>
+      Issues that appear periodically and are manually resolved each time are not BAU.
+      They are tech debt wearing a BAU costume. If something can be automated, automate it.
+      If it recurs on a cadence, it deserves a permanent fix. The classification matters:
+      a periodic manual task is either <em>accepted operational work</em> or
+      <em>unresolved engineering debt</em>. Name it correctly.
+    </p>
+
+    <h3>Improving metrics</h3>
+    <p>
+      After every non-trivial incident, ask: what metric would have told us this was coming
+      ten minutes earlier? Add it. Observability is not a project with a completion date.
+      It is a continuous refinement driven by everything the system has surprised you with.
+    </p>
+
+    <h3>Improving alerting</h3>
+    <p>
+      An alert that fires too late is a post-mortem input. An alert that fires too early
+      is noise that erodes trust in the alerting system until engineers start ignoring it.
+      After every incident, audit the alert that fired (or didn&rsquo;t): was the threshold right?
+      Was the right person notified? Was the runbook linked? Was the severity accurate?
+    </p>
+
+    <div class="callout">
+      <div class="callout-head">Observability improvement questions after every incident</div>
+      <ul>
+        <li>What metric would have given earlier warning? Does it exist? If not, add it.</li>
+        <li>Did the alert fire at the right time, or after the customer was already affected?</li>
+        <li>Was the alert severity accurate relative to the actual business impact?</li>
+        <li>Is the runbook linked from the alert? Is the runbook current?</li>
+        <li>Could this issue have been automated away? What is the effort vs. recurrence cost?</li>
+        <li>Is this tech debt? Log it. Name it. Prioritise it honestly against feature work.</li>
+      </ul>
+    </div>
+
+    <div class="pullquote">
+      <p>&ldquo;Issues solved permanently improve the system.<br/>
+      Issues solved periodically improve the engineer.<br/>
+      Issues solved repeatedly improve nobody.&rdquo;</p>
+    </div>
+
+      <hr class="divider" />
+
+    <!-- Section 7 -->
+    <div class="section-accent"><span class="section-num" id="section7">07</span></div>
+    <h2 class="section-heading">The Handover</h2>
+
+    <p>
+      One of the most crucial &mdash; and most frequently underestimated &mdash; aspects of
+      OnCall duties is the handover. A successful handover is not a formality. It is the
+      final act of ownership. It is what transforms your OnCall rotation from an isolated
+      experience into institutional memory.
+    </p>
+
+    <div class="matrix" style="grid-template-columns: 1fr 1fr 2fr;">
+      <table>
+        <thead>
+          <tr class="matrix-header" style="grid-template-columns: 1fr 1fr 2fr;">
+            <th>Handover component</th>
+            <th>What to include</th>
+            <th>Why it matters</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="matrix-row" style="grid-template-columns: 1fr 1fr 2fr;">
+            <td class="label">BAU status</td>
+            <td>State of all periodic jobs, any deviations resolved or ongoing</td>
+            <td>Incoming OnCall must know the baseline before they can detect the anomaly</td>
+          </tr>
+          <tr class="matrix-row" style="grid-template-columns: 1fr 1fr 2fr;">
+            <td class="label">Open anomalies</td>
+            <td>Active investigations, suspected causes, current mitigations in place</td>
+            <td>Prevents duplicate investigation and cold-start delay mid-incident</td>
+          </tr>
+          <tr class="matrix-row" style="grid-template-columns: 1fr 1fr 2fr;">
+            <td class="label">Pending action items</td>
+            <td>Items that need follow-up: permanent fixes, runbook updates, escalations</td>
+            <td>Ensures issues that occurred on your watch don&rsquo;t silently disappear</td>
+          </tr>
+          <tr class="matrix-row" style="grid-template-columns: 1fr 1fr 2fr;">
+            <td class="label">Tech debt logged</td>
+            <td>Any recurring issues or gaps identified during the rotation</td>
+            <td>Converts OnCall signal into engineering backlog before it is forgotten</td>
+          </tr>
+          <tr class="matrix-row" style="grid-template-columns: 1fr 1fr 2fr;">
+            <td class="label">Observability changes</td>
+            <td>New alerts added, thresholds tuned, dashboards updated</td>
+            <td>Incoming OnCall should know what has changed in their monitoring landscape</td>
+          </tr>
+          <tr class="matrix-row" style="grid-template-columns: 1fr 1fr 2fr;">
+            <td class="label">System mood</td>
+            <td>Brief qualitative assessment: quiet, elevated, watchful</td>
+            <td>No dashboard captures the gut feel of an engineer who has just spent 12 hours watching a system</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p>
+      While some OnCall duties can be offloaded to a dedicated team, the primary responsibility
+      of being the primary point of contact cannot be delegated away. Not just attentiveness
+      to unexpected activity &mdash; but actively driving the team toward immediate mitigation.
+      That responsibility is yours for the duration of the rotation, and it transfers cleanly
+      only through a thorough handover.
+    </p>
+
+    <div class="callout">
+      <div class="callout-head">The OnCall loop</div>
+      <ul>
+      <li><strong>Checklist</strong> &rarr; know your baseline before anything else.</li>
+      <li><strong>BAU</strong> &rarr; keep the normal running so you can recognise the abnormal.</li>
+      <li><strong>Anomalies</strong> &rarr; detect deviations early; investigate with structure.</li>
+      <li><strong>Unanticipated issues</strong> &rarr; triage fast, communicate early, fall forward.</li>
+      <li><strong>Tech debt &amp; observability</strong> &rarr; convert every surprise into a permanent improvement.</li>
+      <li><strong>Handover</strong> &rarr; transfer state, not just the pager.</li>
+      </ul>
+    </div>
+
+  </div>
+
+    <p>
+      OnCall is not a tax on engineering time. It is the feedback loop that makes systems
+      &mdash; and engineers &mdash; better. The checklist, the BAU discipline, the anomaly literacy,
+      the mitigation instinct, the observability habit, the clean handover: none of these
+      are glamorous. All of them compound.
+    </p>
+    <div class="closing-banner">
+    <p>
+      And finally &mdash; hope for a smooth and uneventful OnCall. &#x1F91E;
+    </p>
+    </div>
+
+    <div class="closing-section">
+      <p>
+        If you lead engineering teams, run distributed systems at scale, or think seriously
+        about engineering culture and maintenance practices &mdash; I&rsquo;d love to connect.
+      </p>
+    <p style="font-style:normal; font-size:14px; color: #555550; font-family:  var(--font-mono);">linkedin.com/in/pradeep &nbsp;·&nbsp; Pune, India</p>
+    </div>
+
+</article>
+</main>
+
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-name">Pradeep A. Dalvi</div>
+    <div style="font-size:12px; color:#555550; font-family: var(--font-mono);">Principal Systems Architect · Distributed Systems &amp; Payments</div>
+    <div class="footer-links">
+      <a href="https://linkedin.com/in/pradeep">LinkedIn</a>
+      <a href="https://github.com/pradeepdalvi">GitHub</a>
+    </div>
+    <div class="footer-copy">© 2026 Pradeep A. Dalvi · All rights reserved</div>
+  </div>
+</footer>
+
+</body>
+</html>

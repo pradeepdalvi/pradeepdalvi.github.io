@@ -14,7 +14,8 @@
     --border-hover: rgba(255,255,255,0.16);
     --font-display: 'Playfair Display', Georgia, serif;
     --font-body: 'DM Sans', sans-serif;
-    --font-mono: 'DM Mono', monospace;
+    --font-serif: 'DM Sans', 'Inter', system-ui, sans-serif;
+    --font-mono: 'DM Mono', 'JetBrains Mono', monospace;
 
     --color-text-success: #5ecfb0;
     --color-text-warning: #e8c87a;
@@ -718,9 +719,41 @@ strong { font-weight: 500; color: var(--color-text-primary); }
     font-size: 15px;
     color: var(--color-text-secondary);
     font-style: normal;
-    font-family: 'DM Sans', sans-serif;
+    font-family: var(--font-serif);
 }
 
 .blogs-group {
     margin: 1rem 0;
 }
+
+.defn-block { border-left: 4px solid var(--color-border-tertiary); border-radius: 8px; padding: 1.1rem 1.4rem; margin: 1.5rem 0; background: var(--bg-card2); display: flex; gap: 1rem; align-items: flex-start; }
+.defn-label { font-family:  var(--font-mono); font-size: 1rem; color: var(--text-dim); flex-shrink: 0; padding-top: 0.2rem; letter-spacing: 0.04em; }
+.defn-body { font-family: var(--font-serif); font-size: 0.95rem; color: var(--text-muted); line-height: 1.65; }
+.defn-body strong { color: var(--text); font-weight: 500; }
+
+.step-label { font-size: 1rem; font-weight: 500; color: var(--text-muted); letter-spacing: 0.05em; margin: 2rem 0 0.8rem; }
+.steps { border: 1px solid var(--color-border-tertiary); background: var(--bg-card); border-radius: 6px; overflow: hidden; margin: 0 0 2rem; }
+.step { display: grid; grid-template-columns: 2.2rem 1fr; border-bottom: 1px solid var(--color-border-tertiary); }
+.step:last-child { border-bottom: none; }
+.step-num { font-family:  var(--font-mono); font-size: 1rem; font-weight: 500; color: var(--text); padding: 1.2rem 0 1.2rem 1rem; border-right: 1px solid var(--color-border-tertiary); display: flex; align-items: flex-start; }
+.step .step-body { padding: 1rem 1.2rem; }
+.step-body .step-title { font-size: 1rem; color: var(--color-text-primary); margin-bottom: 0.3rem; display: block; }
+.step-body .step-desc { font-size: 1rem; color: var(--color-text-tertiary); line-height: 1.6; margin: 0; }
+.step-body .step-desc strong { color: var(--color-text-secondary); font-weight: 500; }
+
+.options-grid { display: grid; grid-template-columns: 1fr; gap: 4px; overflow: hidden; margin: 0 0 2rem; }
+.option-card { padding: 1.2rem 1.4rem; border-radius: 8px; }
+.option-card:not(.active) { background: var(--color-background-warning);  border: 1px solid var(--color-border-warning); }
+.option-card.active { background: var(--color-background-success); border: 1px solid var(--color-border-success);}
+.option-badge { display: inline-block; font-family: var(--font-serif); font-size: 0.7rem; font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase; padding: 2px 8px; border-radius: 3px; margin-bottom: 0.7rem; border: 1px solid; }
+.option-badge.cat { color: var(--color-text-warning); border-color: var(--color-border-warning); background: var(--color-background-warning); }
+.option-badge.primary { color: var(--color-text-success); border-color: var(--color-border-success); background: transparent; }
+.option-card .option-title { font-size: 1.2rem; font-weight: 500; color: var(--text); margin-bottom: 0.5rem; }
+.option-card .option-body { font-size: 1rem; color: var(--text-muted); line-height: 1.65; }
+.option-card .option-body strong { color: var(--text); font-weight: 500; }
+
+.metric-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; background: var(--bg); overflow: hidden; margin: 1.5rem 0 2rem; }
+.metric-card { background: var(--color-background-warning); border: 1px solid var(--color-border-warning); border-radius: 8px; padding: 1.1rem 1.2rem; }
+.metric-badge { display: inline-block; font-family:  var(--font-mono); font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.5rem; letter-spacing: 0.04em; }
+.metric-card h4 { font-family: var(--font-serif); font-size: 1rem; font-weight: 500; color: var(--text); margin-bottom: 0.4rem; }
+.metric-card p { font-family: var(--font-serif); font-size: 0.9rem; color: var(--text-muted); line-height: 1.55; margin: 0; }
