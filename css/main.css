@@ -14,15 +14,24 @@ nav ul li, footer ul li {
 }
 a {
     text-decoration: none;
-    color: #999;
+    color: #1c1c1c;
 }
 a:hover {
-    text-decoration: underline;
+    text-decoration: none;
+    color: #00bcd4;
 }
 h1 {
+    color: #CCCCCC;
     font-size: 1.5em;
     font-family: 'Helvetica', 'Arial', 'Sans-Serif';
 }
+
+h2 {
+    color: #999999;
+    font-size: 1.2em;
+    font-family: 'Helvetica', 'Arial', 'Sans-Serif';
+}
+
 p {
     font-family: 'Avenir', Helvetica, Arial, sans-serif;
     font-size: 1em;
@@ -41,4 +50,8 @@ ul.posts {
 
 ul.posts li {
     list-style: none;
+}
+
+.container {
+    max-width: 860px;
 }
