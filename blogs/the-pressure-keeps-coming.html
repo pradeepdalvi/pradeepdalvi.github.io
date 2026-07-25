@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-DQ4TX83NWC"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-DQ4TX83NWC');
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="/css/blogs.css">
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="48x48" href="/favicon-48x48.png">
+    <link rel="manifest" href="/manifest.webmanifest" crossOrigin="use-credentials">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="theme-color" content="#fff">
+    <meta name="application-name" content="Pradeep A. Dalvi">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon-180x180.png">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Pradeep A. Dalvi">
+
+<style>
+/* ─────────────────────────────────────────────────
+   NEW styles only — everything else is in main.css
+   ───────────────────────────────────────────────── */
+
+/* 1 · Label above a .visualization block */
+.viz-label {
+    display: block;
+    font-family: var(--font-mono);
+    font-size: 0.95rem;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--color-text-warning);
+    margin-bottom: 0.6rem;
+}
+
+/* 2 · Syntax-highlight spans inside .visualization <pre> */
+.c  { color: var(--color-text-secondary); }
+.kw { color: var(--color-text-info); }
+.vl { color: var(--accent-green); }
+.hl { color: var(--color-text-info); }
+
+/* 3 · 3-column variant of .stats-grid (M/M/1 inline row) */
+.stats-grid-3 { grid-template-columns: repeat(3, 1fr); }
+
+/* 4 · 3-column variant of .matrix rows (Call Type | Strategy | Rationale) */
+.matrix-header.cols-3,
+.matrix-row.cols-3    { grid-template-columns: 1.5fr 0.9fr 2fr; }
+
+/* 5 · .badge variants set border-color but base .badge has no border shorthand */
+.badge-warn,
+.badge-success,
+.badge-danger { border: 1px solid; }
+
+/* 6 · Warning-flavoured .callout for "Fail Fast" conditions */
+.callout.warning                  { border-color: var(--color-border-warning); }
+.callout.warning .callout-head    { color: var(--color-text-warning); }
+.callout.warning ul li::before    { color: var(--accent); }
+</style>
+</head>
+<body>
+
+<!-- ── NAV ─────────────────────────────────────────── -->
+<header class="site-header">
+  <div class="header-inner">
+    <a class="site-name" href="https://pradeepdalvi.com">Pradeep A. Dalvi</a>
+    <nav class="header-links">
+      <a href="https://pradeepdalvi.com/blogs/">Blogs</a>
+      <a href="https://pradeepdalvi.com/about">About</a>
+    </nav>
+  </div>
+</header>
+
+<!-- ── HERO ─────────────────────────────────────────── -->
+<div class="hero">
+  <div class="hero-tags">
+    <span class="tag tag-arch">Distributed Systems</span>
+    <span class="tag tag-payments">Back-Pressure</span>
+    <span class="tag tag-resilience">Resilience Engineering</span>
+    <span class="tag-sep">·</span>
+    <span class="tag-date">July 2026</span>
+  </div>
+
+  <h1 class="hero-title">
+    The Pressure Keeps Coming.<br>
+    <em>When it does, is your system resilient enough?</em>
+  </h1>
+
+  <p class="hero-deck">
+    A 503 without a Retry-After is a grenade with the pin already pulled. You've told the caller something is wrong, but given it every reason to make it worse.
+  </p>
+
+  <div class="author-strip">
+    <div class="avatar">PD</div>
+    <div>
+      <div class="author-name">Pradeep A. Dalvi</div>
+      <div class="author-role">Principal Systems Architect · Distributed Systems &amp; Payments</div>
+    </div>
+    <div class="read-time">12 min read</div>
+  </div>
+</div>
+
+<!-- ── STATS BAR ──────────────────────────────────────── -->
+<div class="stats-bar">
+  <div class="stats-grid">
+    <div class="stats-cell">
+      <span class="num danger">∞</span>
+      <div class="label">latency at 100% utilisation — not "worse", asymptotically infinite per Little's Law</div>
+    </div>
+    <div class="stats-cell">
+      <span class="num warning">10×</span>
+      <div class="label">baseline latency at 90% utilisation — M/M/1 model, simplest possible</div>
+    </div>
+    <div class="stats-cell">
+      <span class="num danger">t+60</span>
+      <div class="label">minutes a retry storm outlasts its root cause without back-pressure</div>
+    </div>
+    <div class="stats-cell">
+      <span class="num success">0</span>
+      <div class="label">acceptable service boundaries without explicit back-pressure design</div>
+    </div>
+  </div>
+</div>
+
+<!-- ── ARTICLE ────────────────────────────────────────── -->
+<article class="article">
+  <div class="prose">
+
+    <!-- TOC -->
+    <div class="toc">
+      <div class="toc-head">In this article</div>
+      <ol>
+        <li><a href="#s1">Concurrency and Latency Are Not Independent Variables</a></li>
+        <li><a href="#s2">Three Highways, One Broken Truck</a></li>
+        <li><a href="#s3">Failure Rates: The Metric That Lies to You</a></li>
+        <li><a href="#s4">Back-Pressure: The System's Right to Be Honest</a></li>
+        <li><a href="#s5">Fail Fast vs Fail Safe: The Wrong Question</a></li>
+        <li><a href="#s6">The Decision You Make Before the Incident</a></li>
+        <li><a href="#s7">What the System Is Already Telling You</a></li>
+      </ol>
+    </div>
+
+    <!-- ── 01 ─────────────────────────────────────────── -->
+    <div class="section-accent"><span class="section-num">01</span></div>
+    <h2 class="section-heading" id="s1">Concurrency and Latency Are Not Independent Variables</h2>
+
+    <p>Most engineers learn concurrency and latency as separate levers. Add more threads — get more throughput. Optimise your hot path — reduce latency. Clean, intuitive, and mostly wrong in any system with shared resources. Which is every interesting system.</p>
+
+    <p>In a system with queuing — and every service under real load has a queue, whether you named it or not — concurrency and latency are coupled through a relationship that bites you slowly and then all at once. The math is Little's Law, and it doesn't care about your SLO.</p>
+
+    <div class="visualization">
+      <span class="viz-label">Little's Law — the fundamental constraint</span>
+      <pre>
+<span class="kw">L</span> = <span class="kw">λ</span> × <span class="kw">W</span>
+
+<span class="c">L  →  average number of requests in the system (queue + in-service)</span>
+<span class="c">λ  →  arrival rate (requests per second)</span>
+<span class="c">W  →  average time in system — latency, end-to-end</span>
+
+<span class="c">Rearranged:  W = L / λ</span>
+
+<span class="c">As utilisation → 100%, the queue (L) grows without bound.
+W grows proportionally. Not gradually. Asymptotically.
+At 95% utilisation, adding 1% more load can double your tail latency.</span></pre>
+    </div>
+
+    <p>The intuition: you have 200 concurrent requests in-flight against a service that handles 220 comfortably. A new feature adds 40ms to a common call path. The queue builds. Latency climbs. Callers retry. Concurrency grows. You now have 400 in-flight against a service designed for 220. You didn't have a spike. You had a drip that accumulated.</p>
+
+    <div class="stats-bar">
+      <div class="stats-grid stats-grid-3">
+        <div class="stats-cell"><span class="num warning">~3×</span><div class="label">latency at 70% utilisation</div></div>
+        <div class="stats-cell"><span class="num danger">~10×</span><div class="label">latency at 90% utilisation</div></div>
+        <div class="stats-cell"><span class="num danger">∞</span><div class="label">non-deterministic at 95%+</div></div>
+      </div>
+    </div>
+
+    <p>These aren't from a benchmark — they come from the M/M/1 queueing model, the <em>simplest</em> possible model, with no variance. Real systems are worse. A single slow request can block a thread pool and blow up p99 for everything behind it. This is head-of-line blocking: endemic to synchronous systems and invisible until it isn't.</p>
+
+    <p>Concurrency isn't just "how many things run at once." It's the measure of how much unresolved work your system is holding at any moment. High concurrency against constrained resources is a debt that compounds, and it collects with interest.</p>
+
+    <!-- ── 02 ─────────────────────────────────────────── -->
+    <div class="section-accent"><span class="section-num">02</span></div>
+    <h2 class="section-heading" id="s2">Three Highways, One Broken Truck</h2>
+
+    <p>Abstract queueing math has a way of staying abstract until you're actually sitting in it. Here's the same dynamic in a form everyone has experienced — usually while running late for something.</p>
+
+    <p>A truck breaks down and blocks one lane of a highway. One single point of partial failure, not a total outage. What happens next is not determined by the truck. It's determined by how much capacity the road had before it broke down, how fast new traffic keeps joining the tail, and whether anything upstream knows to slow the inflow before the jam develops its own momentum.</p>
+
+    <h3 class="section-subheading">Two-Lane Highway — 50% Capacity Retained</h3>
+
+      <figure>
+          <img src="/images/back_pressure_2_lanes_dark.png" alt="Infographic illustrating 2-lane highway shifting back-pressure immediately.">
+          <figcaption>Figure 1: 2-lane highway · 1 lane blocked · capacity retained: 50%</figcaption>
+      </figure>
+
+    <p>Half the road is gone. The queue builds at the rate new cars arrive minus the rate the single open lane can drain — at normal traffic volumes that difference is positive, meaning the queue grows without a natural ceiling. With no signal to the on-ramps, inflow continues unaware. A single car stalling for ten seconds at the merge point can re-extend a nearly-cleared jam by 500 metres. This is head-of-line blocking in traffic form: one unit of variance propagates backward through every car queued behind it.</p>
+
+    <h3 class="section-subheading">Three-Lane Highway — 66% Capacity Retained</h3>
+
+      <figure>
+          <img src="/images/back_pressure_3_lanes_dark.png" alt="Infographic illustrating 3-lane highway where back-pressure is building up.">
+          <figcaption>Figure 2: 3-lane highway · 1 lane blocked · capacity retained: 66%</figcaption>
+      </figure>
+
+    <p>Two lanes remain. The queue grows, but more slowly. Notice the rubberneck effect: drivers in the open lanes slow to look at the incident. Latency increases for every car passing the obstruction, not just those directly blocked. In system terms: a slow operation holds a thread, shrinks the effective pool, and increases wait time for operations that should have been entirely unaffected. The contamination is lateral, not just linear. Three lanes buys time. It doesn't buy immunity.</p>
+
+    <h3 class="section-subheading">Four-Lane Highway — 75% Capacity Retained</h3>
+
+      <figure>
+          <img src="/images/back_pressure_4_lanes_dark.png" alt="Infographic illustrating 4-lane highway shifting back-pressure very slowly.">
+          <figcaption>Figure 3: 4-lane highway · 1 lane blocked · capacity retained: 75%</figcaption>
+      </figure>
+
+    <p>Three lanes remain. The system absorbs the shock. A queue forms — the math demands it — but at normal arrival rates it dissipates between traffic pulses rather than compounding between them. Critically: with three lanes flowing, the highway patrol has time to close the on-ramps before the jam reaches them. The back-pressure signal goes upstream before the problem grows beyond the road's ability to self-correct. Slack capacity isn't waste. It's the mechanism that makes recovery possible.</p>
+
+    <h3 class="section-subheading">The Same Truck, Three Roads — Queue Depth Over Time</h3>
+
+    <div class="visualization">
+      <span class="viz-label">queue buildup — no ramp intervention — on-ramps open throughout</span>
+      <pre>
+          │  2-LANE (50%)               │  3-LANE (66%)               │  4-LANE (75%)
+──────────┼─────────────────────────────┼─────────────────────────────┼─────────────────────────
+ t =  0   │  jam forming                │  jam forming                │  brief slowdown
+ t =  5m  │  ~300 m                     │  ~100 m                     │  ~30 m
+ t = 15m  │  ~2 km                      │  ~600 m                     │  ~150 m
+ t = 30m  │  ~5 km                      │  ~1.5 km                    │  clears naturally ✓
+ t = 60m  │  GRIDLOCK                   │  4 km+ and worsening        │  clear ✓
+          │  extends to city centre     │  on-ramp joins accelerate   │  ramp management active</pre>
+    </div>
+
+    <p>The two-lane highway doesn't just have a worse jam — it has a jam that grows faster than it can drain <em>even after the truck is removed</em>. By t=60, the queue has developed its own momentum. The inflow has to stop first. The existing backlog drains. Only then does the road return to baseline — and that takes longer than the original incident did. The problem outlives its cause.</p>
+
+    <p>In a distributed system, this is exactly what happens when you remove the root cause and watch the retry storm persist for another 20 minutes. The callers don't know the road is clear. They're still retrying at the rate they learned was necessary when the system was failing.</p>
+
+    <blockquote>
+      <p>The on-ramps are the kill shot. A broken truck creates a bottleneck. An on-ramp with no signal converts that bottleneck into a gridlock that outlasts the original problem by an hour.</p>
+    </blockquote>
+
+    <div class="callout">
+      <div class="callout-head">The highway, mapped to your system</div>
+      <ul>
+        <li><strong>Broken truck</strong> — a degraded service, saturated thread pool, or slow DB shard: one partial failure, not total outage</li>
+        <li><strong>Number of lanes</strong> — concurrency capacity: thread pool size, replica count, available connections to the resource</li>
+        <li><strong>Queue behind the truck</strong> — request queue depth climbing; latency rising as predicted by Little's Law</li>
+        <li><strong>Rubberneck in open lanes</strong> — head-of-line blocking: one slow operation contaminates thread pool neighbours even in nominally healthy workers</li>
+        <li><strong>On-ramp with no signal</strong> — callers retrying without back-pressure awareness: new load arriving at a system already past capacity</li>
+        <li><strong>Patrol closing on-ramps</strong> — <code>429</code> with <code>Retry-After</code>, load-aware ingress control: the signal that lets the system drain before accepting new work</li>
+        <li><strong>Slack capacity (4-lane)</strong> — headroom you chose to preserve: the physical margin that makes in-place recovery possible without a full restart</li>
+      </ul>
+    </div>
+
+    <!-- ── 03 ─────────────────────────────────────────── -->
+    <div class="section-accent"><span class="section-num">03</span></div>
+    <h2 class="section-heading" id="s3">Failure Rates: The Metric That Lies to You</h2>
+
+    <p>When a system hits capacity, the most natural response is to start returning errors. <code>503 Service Unavailable</code>. <code>429 Too Many Requests</code>. The service is load-shedding. It looks like the responsible thing to do. Usually it isn't.</p>
+
+    <p>Failure rates as load-shedding only work if callers are well-behaved. In practice, they aren't. A <code>503</code> is an open invitation to retry. Every retry is new concurrency arriving at a system already at capacity. The system that was at 95% utilisation is now processing the same requests twice, sometimes three times, with callers getting progressively more aggressive because their timeout clock is ticking.</p>
+
+    <div class="visualization">
+      <span class="viz-label">retry storm — how it amplifies</span>
+      <pre>
+<span class="hl">t=0</span>   Arrival: 200 req/s   Capacity: 220 req/s   <span class="vl">✓ healthy</span>
+
+<span class="hl">t=1</span>   Slow deploy adds +40ms latency per request
+      Queue builds → latency climbs → callers begin timing out
+
+<span class="hl">t=2</span>   Callers retry on timeout
+      Arrival: 200 original + 80 retries = <span class="kw">280 req/s</span>
+      System returns 503 to 60 req/s — no Retry-After
+
+<span class="hl">t=3</span>   Callers retry on 503
+      Arrival: 280 + 60 = <span class="kw">340 req/s</span>
+      More errors → more retries → <span class="kw">420 req/s</span> → ...
+
+<span class="c">result: System designed for 220 req/s absorbing 400+
+        Half of that is pure retry overhead — wasted work on both sides</span></pre>
+    </div>
+
+    <p>Failure rates are a trailing indicator. By the time they're elevated, the system has already lost control of its own concurrency. The service logs look clean — it's returning errors, not hanging. The caller logs look clean — it's retrying, exactly as configured. The system is on fire, and no dashboard is red yet.</p>
+
+    <!-- ── 04 ─────────────────────────────────────────── -->
+    <div class="section-accent"><span class="section-num">04</span></div>
+    <h2 class="section-heading" id="s4">Back-Pressure: The System's Right to Be Honest</h2>
+
+    <p>Back-pressure is borrowed from fluid dynamics — literally the resistance a fluid encounters flowing through a pipe. In distributed systems, it means propagating the signal of overload <em>upstream</em>, so producers slow down rather than continuing to push work into a system that can't absorb it.</p>
+
+    <p>TCP has done this correctly since 1981. The receive window tells the sender exactly how much data it can accept. The sender waits. No retry storm. No cascade. Just honest flow control built into the wire protocol. Distributed systems — for reasons partly architectural, partly cultural — often don't replicate this at the application layer. Services emit failures instead of signals. Callers treat failures as "try again." The mechanism is absent, and the system compensates by getting slower and then by getting broken.</p>
+
+    <p>The difference between back-pressure and failure rates isn't primarily technical — it's about who owns the flow control decision. Failure rates push that decision to the caller, who has the least information and usually handles it badly. Back-pressure keeps it with the service, which has the queue depth, the latency histograms, and the actual knowledge of what it can absorb.</p>
+
+    <div class="callout">
+      <div class="callout-head">Implementation Patterns</div>
+      <ul>
+        <li><strong>HTTP 429 with Retry-After</strong> — not a suggestion, a contract. Tell callers exactly when to try again. Without this, 429 is just a slightly different invitation to retry immediately.</li>
+        <li><strong>Queue depth as an API signal</strong> — expose queue depth or concurrency watermark as a metric callers can observe. Let them decide whether to wait, redirect, or reject before sending.</li>
+        <li><strong>Reactive Streams (push-pull)</strong> — the consumer explicitly requests N items. The producer emits only what's been requested downstream. Back-pressure is structural, not bolted on.</li>
+        <li><strong>Load-aware routing at the gateway</strong> — the router checks downstream queue depth before forwarding. High depth → secondary pool, or rejection at the edge where the cost is lowest.</li>
+        <li><strong>Token bucket / leaky bucket at ingress</strong> — limit arrival rate, not error rate. Prevent concurrency from building up before it reaches services. The refill rate is the capacity signal.</li>
+      </ul>
+    </div>
+
+    <p>Back-pressure is harder to implement across service boundaries than within them. HTTP wasn't designed for it the way TCP was. That isn't an excuse to skip the design conversation — it's an argument for building rate limiting and load-shedding at the gateway layer, before work enters the system at all.</p>
+
+    <!-- ── 05 ─────────────────────────────────────────── -->
+    <div class="section-accent"><span class="section-num">05</span></div>
+    <h2 class="section-heading" id="s5">Fail Fast vs Fail Safe: The Wrong Question</h2>
+
+    <p>Every architecture conversation about overload eventually arrives here. The system can't handle this request. What does it do?</p>
+
+    <p><strong>Fail Fast</strong> says: return an error immediately. Don't pretend. Don't queue. Let the caller know right now, and let it decide what to do next. <strong>Fail Safe</strong> says: do something reasonable. Return a cached value. Return a degraded response. Return a sensible default. Keep the user experience intact even if the data is imperfect.</p>
+
+    <p>Both are right. Both are wrong. The question being asked is the wrong one.</p>
+
+    <blockquote>
+      <p>The real question isn't "how should the system fail?" It's "what does failure mean for <em>this specific call</em>, in this context, for this user, at this moment?"</p>
+    </blockquote>
+
+    <p>A payment system that fails safe and moves money twice has failed catastrophically in the name of user experience. A recommendations service that fails fast and shows a blank page has prioritised correctness over usability for no good reason. The strategy must be derived from the nature of the operation — not chosen once for the service and applied uniformly everywhere.</p>
+
+    <div class="callout warning">
+      <div class="callout-head">Fail Fast — appropriate when</div>
+      <ul>
+        <li>The operation has <strong>side effects</strong>: money moved, state mutated, message sent, reservation made. Partial success is a worse outcome than explicit failure.</li>
+        <li>A degraded response is worse than no response — stale token validation, expired auth, incorrect inventory counts where overselling costs more than a failed checkout.</li>
+        <li>The caller has a meaningful fallback and needs to know quickly enough to use it before its own timeout fires.</li>
+        <li>You're operating a <strong>circuit breaker</strong>. Fail fast is what trips the breaker, creates the recovery window, and prevents the cascade from deepening.</li>
+        <li>Correctness is non-negotiable and partial correctness is indistinguishable from complete correctness to the user — fail clearly, not silently wrong.</li>
+      </ul>
+    </div>
+
+    <div class="callout">
+      <div class="callout-head">Fail Safe — appropriate when</div>
+      <ul>
+        <li>The call is <strong>read-only enrichment</strong> — recommendations, personalisation, non-critical metadata. Degrading gracefully doesn't degrade the core workflow.</li>
+        <li>Stale data is materially better than no data — search results, analytics dashboards, content feeds. The user gets something useful; the omission is invisible to them.</li>
+        <li>The service is not on the critical path for the user's current action. Fail safe isolates the fault without propagating it to the foreground experience.</li>
+        <li><strong>Idempotency is guaranteed</strong>. Retrying or returning a cached result can't cause double effects, phantom state, or data inconsistency.</li>
+        <li>The blast radius of a "wrong but graceful" response is smaller than the blast radius of an explicit error that breaks the user flow entirely.</li>
+      </ul>
+    </div>
+
+    <div class="matrix">
+      <div class="matrix-header cols-3">
+        <div>Call Type</div>
+        <div>Strategy</div>
+        <div>Rationale</div>
+      </div>
+      <div class="matrix-row cols-3">
+        <div class="label">Payment authorisation</div>
+        <div><span class="badge badge-warn">Fail Fast</span></div>
+        <div>Side effects; correctness over UX</div>
+      </div>
+      <div class="matrix-row cols-3">
+        <div class="label">Auth token validation</div>
+        <div><span class="badge badge-warn">Fail Fast</span></div>
+        <div>Stale auth is worse than no auth</div>
+      </div>
+      <div class="matrix-row cols-3">
+        <div class="label">Inventory reservation</div>
+        <div><span class="badge badge-warn">Fail Fast</span></div>
+        <div>Overselling costs more than a failed checkout</div>
+      </div>
+      <div class="matrix-row cols-3">
+        <div class="label">Reminder delivery scheduling</div>
+        <div><span class="badge badge-warn">Fail Fast</span></div>
+        <div>Missed window cannot be recovered silently</div>
+      </div>
+      <div class="matrix-row cols-3">
+        <div class="label">Search result ranking</div>
+        <div><span class="badge badge-success">Fail Safe</span></div>
+        <div>Unranked or cached results beat an empty page</div>
+      </div>
+      <div class="matrix-row cols-3">
+        <div class="label">Product recommendations</div>
+        <div><span class="badge badge-success">Fail Safe</span></div>
+        <div>Fallback to bestsellers; no harm done</div>
+      </div>
+      <div class="matrix-row cols-3">
+        <div class="label">User profile enrichment</div>
+        <div><span class="badge badge-success">Fail Safe</span></div>
+        <div>Anonymous or default profile is acceptable</div>
+      </div>
+      <div class="matrix-row cols-3">
+        <div class="label">Analytics event ingestion</div>
+        <div><span class="badge badge-success">Fail Safe</span></div>
+        <div>Dropped events acceptable; blocking writes is not</div>
+      </div>
+    </div>
+
+    <!-- ── 06 ─────────────────────────────────────────── -->
+    <div class="section-accent"><span class="section-num">06</span></div>
+    <h2 class="section-heading" id="s6">The Decision You Make Before the Incident</h2>
+
+    <p>None of this should be decided under pressure. By the time an incident is in progress, the system is already making these decisions for you — implicitly, at the worst possible moment, usually in the wrong direction. The right time is in the design phase of each service boundary, before the first production deployment. That conversation takes an afternoon. The incident that happens without it takes a week to recover from and a month to fully understand.</p>
+
+    <p class="step-label">Five questions every service boundary must answer before production</p>
+
+    <div class="steps">
+      <div class="step">
+        <span class="step-num">1</span>
+        <div class="step-body">
+          <span class="step-title">Know your concurrency ceiling — in writing, not in someone's head</span>
+          <p class="step-desc">What is the maximum concurrency this service can handle before latency meaningfully degrades? Document it on the team wiki before someone who knows it switches teams.</p>
+        </div>
+      </div>
+      <div class="step">
+        <span class="step-num">2</span>
+        <div class="step-body">
+          <span class="step-title">Design the back-pressure signal before the first incident, not after</span>
+          <p class="step-desc">When that limit is hit, how is overload communicated upstream? <code>429</code> with <code>Retry-After</code>? Queue depth metric? Load-aware routing? Pick one and implement it deliberately before you need it.</p>
+        </div>
+      </div>
+      <div class="step">
+        <span class="step-num">3</span>
+        <div class="step-body">
+          <span class="step-title">Align on Fail Fast vs Fail Safe per call path, not per service</span>
+          <p class="step-desc">For each caller: does a failure mean "return an error" or "degrade gracefully"? Write it down. Align with the caller's team. Circuit breakers and fallbacks should reflect this — not contradict it in production.</p>
+        </div>
+      </div>
+      <div class="step">
+        <span class="step-num">4</span>
+        <div class="step-body">
+          <span class="step-title">Retry policy is a safety contract, not a config default</span>
+          <p class="step-desc">Exponential backoff with jitter is mandatory. Unbounded retries are a bug. Retries without a back-pressure signal are an incident waiting to happen. Make the retry budget explicit.</p>
+        </div>
+      </div>
+      <div class="step">
+        <span class="step-num">5</span>
+        <div class="step-body">
+          <span class="step-title">Timeouts require a plan, not just a value</span>
+          <p class="step-desc">A timeout that fails fast needs a fallback path. A timeout that fails safe needs a cache or a default. "We set a 1-second timeout" is a number without a plan for what happens when it fires.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── 07 ─────────────────────────────────────────── -->
+    <div class="section-accent"><span class="section-num">07</span></div>
+    <h2 class="section-heading" id="s7">What the System Is Already Telling You</h2>
+
+    <p>Latency climbing is the system telling you it's holding more work than it was designed to hold. Failure rates spiking is the system telling you it's given up trying to process that work and started lying to its callers. A retry storm is every caller in the fleet simultaneously telling the system they didn't believe it and tried again anyway.</p>
+
+    <p>Back-pressure is the system asking for the right to be honest. Fail fast is the system choosing accuracy over the appearance of availability. Fail safe is the system choosing continuity over precision. All three are legitimate. None of them are defaults you configure once in a properties file and stop thinking about.</p>
+
+    <blockquote>
+      <p>The difference between a system that degrades gracefully and one that collapses is rarely the technology. It's almost always the conversations that happened — or didn't — before the first real load arrived.</p>
+    </blockquote>
+
+    <div class="closing-section">
+      <p>If you're running distributed services today and haven't answered the five questions above for your critical boundaries, you have undocumented failure modes. The system already knows what they are. It's been waiting for you to ask.</p>
+    </div>
+
+  </div>
+</article>
+
+<!-- ── FOOTER ─────────────────────────────────────────── -->
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-name">Pradeep A. Dalvi</div>
+    <div class="footer-links">
+      <a href="https://linkedin.com/in/pradeep">LinkedIn</a>
+      <a href="https://github.com/pradeepdalvi">GitHub</a>
+      <a href="https://pradeepdalvi.com/blogs/">All Blogs</a>
+    </div>
+    <div class="footer-copy">© 2026 Pradeep A. Dalvi · All rights reserved</div>
+  </div>
+</footer>
+
+</body>
+</html>
