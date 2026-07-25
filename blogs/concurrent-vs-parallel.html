@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-DQ4TX83NWC"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-DQ4TX83NWC');
+  </script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="/css/blogs.css">
+  <link rel="icon" type="image/x-icon" href="/favicon.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="48x48" href="/favicon-48x48.png">
+  <link rel="manifest" href="/manifest.webmanifest" crossOrigin="use-credentials">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="theme-color" content="#fff">
+  <meta name="application-name" content="Pradeep A. Dalvi">
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon-180x180.png">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Pradeep A. Dalvi">
+
+  <title>Concurrent Doesn't Mean Parallel | Blogs — Pradeep A. Dalvi</title>
+
+<style>
+/* ─────────────────────────────────────────────────────
+   NEW styles only — everything else comes from main.css
+   ───────────────────────────────────────────────────── */
+
+/* 1 · Label above a .visualization block */
+.viz-label {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 0.95rem;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-text-warning);
+  margin-bottom: 0.6rem;
+}
+
+/* 2 · Syntax-highlight spans inside .visualization <pre> */
+.c  { color: var(--color-text-secondary); }
+.kw { color: var(--color-text-info); }
+.vl { color: var(--accent-green); }
+.hl { color: var(--color-text-info); }
+
+/* 3 · Inline <code> in dark theme (not in main.css) */
+.prose code {
+    font-family: var(--font-mono);
+    font-size: 0.85em;
+    background: rgba(255,255,255,0.08);
+    color: var(--accent);
+    padding: 0.1em 0.35em;
+    border-radius: 3px;
+}
+
+/* 4 · .badge variants need border shorthand (not in base .badge) */
+.badge-warn,
+.badge-success,
+.badge-danger { border: 1px solid; }
+
+/* 5 · Info-coloured badge for "Parallel" model type */
+.badge-info {
+    display: inline-block;
+    font-size: 14px;
+    font-weight: 500;
+    padding: 2px 7px;
+    border-radius: 4px;
+    vertical-align: middle;
+    border: 1px solid rgba(0,188,212,0.3);
+    background: rgba(0,188,212,0.08);
+    color: var(--color-text-info);
+}
+
+/* 6 · Neutral badge for "Neither" model type */
+.badge-muted {
+    display: inline-block;
+    font-size: 14px;
+    font-weight: 500;
+    padding: 2px 7px;
+    border-radius: 4px;
+    vertical-align: middle;
+    border: 1px solid rgba(255,255,255,0.1);
+    background: rgba(255,255,255,0.06);
+    color: var(--text-muted);
+}
+
+/* 7 · 2×2 quadrant grid (Concurrent / Parallel combinations) */
+.quad-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+    margin: 1.5rem 0;
+}
+
+.quad {
+    border: 1px solid var(--border);
+    border-radius: var(--border-radius-lg);
+    padding: 1.2rem 1.4rem;
+    background: var(--bg-card);
+}
+
+.quad-tag {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    display: block;
+    margin-bottom: 0.5rem;
+}
+
+.quad h4 {
+    font-size: 1rem;
+    font-weight: 500;
+    color: var(--color-text-primary);
+    margin-bottom: 0.4rem;
+}
+
+.quad p {
+    font-size: 0.875rem;
+    color: var(--text-muted);
+    line-height: 1.6;
+    margin: 0;
+}
+
+/* Quadrant colour variants */
+.quad.qc  { border-color: var(--color-border-warning); background: var(--color-background-warning); }
+.quad.qc  .quad-tag { color: var(--accent); }
+
+.quad.qcp { border-color: var(--color-border-success); background: var(--color-background-success); }
+.quad.qcp .quad-tag { color: var(--accent-green); }
+
+.quad.qp  { border-color: rgba(0,188,212,0.3); background: rgba(0,188,212,0.07); }
+.quad.qp  .quad-tag { color: var(--color-text-info); }
+
+.quad.qn  .quad-tag { color: var(--text-dim); }
+
+/* 8 · Warning-flavoured .callout for CPU-bound section */
+.callout.warning                { border-color: var(--color-border-warning); }
+.callout.warning .callout-head  { color: var(--color-text-warning); }
+.callout.warning ul li::before  { color: var(--accent); }
+</style>
+</head>
+<body>
+
+<!-- ── NAV ─────────────────────────────────────────────── -->
+<header class="site-header">
+  <div class="header-inner">
+    <a class="site-name" href="https://pradeepdalvi.com">Pradeep A. Dalvi</a>
+    <nav class="header-links">
+      <a href="https://pradeepdalvi.com/blogs/">Blogs</a>
+      <a href="https://pradeepdalvi.com/about">About</a>
+    </nav>
+  </div>
+</header>
+
+<!-- ── HERO ─────────────────────────────────────────────── -->
+<div class="hero">
+  <div class="hero-tags">
+    <span class="tag tag-arch">Systems Engineering</span>
+    <span class="tag tag-payments">Concurrency</span>
+    <span class="tag tag-resilience">Distributed Systems</span>
+    <span class="tag-sep">·</span>
+    <span class="tag-date">July 2026</span>
+  </div>
+
+  <h1 class="hero-title">
+    Concurrent Doesn't Mean Parallel.<br>
+    <em>And parallel doesn't mean fast.</em>
+  </h1>
+
+  <div class="hero-deck">
+    "Concurrency is about dealing with lots of things at once. Parallelism is about doing lots of things at once."
+    <cite>— Rob Pike</cite>
+  </div>
+
+  <div class="author-strip">
+    <div class="avatar"><img src="/images/actor_thumbnail.jpeg" class="thumbnail" alt="PD"/></div>
+    <div>
+      <div class="author-name">Pradeep A. Dalvi</div>
+      <div class="author-role">Principal Systems Architect · Distributed Systems &amp; Payments</div>
+    </div>
+    <div class="read-time">11 min read</div>
+  </div>
+</div>
+
+<!-- ── STATS BAR ─────────────────────────────────────────── -->
+<div class="stats-bar">
+  <div class="stats-grid">
+    <div class="stats-cell">
+      <span class="num success">20×</span>
+      <div class="label">max speedup with 95% parallel code — regardless of how many cores you add</div>
+    </div>
+    <div class="stats-cell">
+      <span class="num danger">5%</span>
+      <div class="label">serial fraction that sets that ceiling — the part no amount of hardware can touch</div>
+    </div>
+    <div class="stats-cell">
+      <span class="num warning">64B</span>
+      <div class="label">CPU cache line size — the invisible unit causing false sharing in "parallel" code</div>
+    </div>
+    <div class="stats-cell">
+      <span class="num danger">N²</span>
+      <div class="label">how coherence cost scales per Gunther's Universal Scalability Law</div>
+    </div>
+  </div>
+</div>
+
+<!-- ── ARTICLE ───────────────────────────────────────────── -->
+<article class="article">
+  <div class="prose">
+
+    <div class="toc">
+      <div class="toc-head">In this article</div>
+      <ol>
+        <li><a href="#s1">Concurrency Is a Design Property</a></li>
+        <li><a href="#s2">Parallelism Is an Execution Property</a></li>
+        <li><a href="#s3">The Two-by-Two Nobody Puts in the Textbook</a></li>
+        <li><a href="#s4">Amdahl's Law: The Ceiling Parallelism Can't Escape</a></li>
+        <li><a href="#s5">The Coordination Tax</a></li>
+        <li><a href="#s6">I/O-Bound vs CPU-Bound: The Decision That Precedes Architecture</a></li>
+      </ol>
+    </div>
+
+    <!-- ── 01 ───────────────────────────────────────────── -->
+    <div class="section-accent"><span class="section-num">01</span></div>
+    <h2 class="section-heading" id="s1">Concurrency Is a Design Property</h2>
+
+    <p>Concurrency describes how a program is <em>structured</em> to handle multiple things. It says nothing about whether those things happen simultaneously. A concurrent program manages multiple tasks whose progress can be interleaved — one task suspended while another makes progress, then resumed when its condition is met.</p>
+
+    <p>Think of a single engineer handling multiple production alerts. They get paged on alert A, start investigating, issue a log query that takes 30 seconds. Rather than staring at the terminal, they pick up alert B. They respond to B, the query returns for A, they resume the A investigation. One person. Multiple things in progress. No actual simultaneity — just structured interleaving that eliminates idle time. That's concurrency. The engineer is the CPU. No parallelism required.</p>
+
+    <figure>
+      <img src="/images/concurrency.png" alt="Infographic illustrating Concurrency — one worker, structured interleaving.">
+      <figcaption>Figure 1: Concurrency — one worker, structured interleaving.</figcaption>
+    </figure>
+
+    <p>This is why Node.js handles tens of thousands of concurrent connections on a single thread. It isn't parallel — one piece of JavaScript executes at a time. But the event loop is structured to never block waiting for I/O: the moment a socket read would block, it registers a callback and moves to the next ready event. The CPU is never idle because a slow operation is pending. Concurrency doing real work, without any parallelism at all.</p>
+
+    <!-- ── 02 ───────────────────────────────────────────── -->
+    <div class="section-accent"><span class="section-num">02</span></div>
+    <h2 class="section-heading" id="s2">Parallelism Is an Execution Property</h2>
+
+    <p>Parallelism describes how a program <em>executes</em>. It requires multiple processing units — CPU cores, machines, GPU shader units — and means that multiple tasks are genuinely running at the same wall-clock instant. Not interleaved. Simultaneous.</p>
+
+    <p>A team of five engineers each handling a separate incident in separate rooms — that's parallelism. The incidents are truly being worked at the same moment. No scheduling, no turn-taking. The hardware scales throughput linearly — up to a limit we'll come to shortly.</p>
+
+    <figure>
+      <img src="/images/parallelism.png" alt="Infographic illustrating Parallelism — multiple workers, simultaneous execution.">
+      <figcaption>Figure 2: Parallelism — multiple workers, simultaneous execution.</figcaption>
+    </figure>
+
+    <p>This is what a CPU does with SIMD instructions: apply the same operation to 16 values in a single clock cycle. It's what a GPU does with thousands of shader cores running the same kernel on different data simultaneously. It's what a database does when it fans out a query across shards. Rob Pike's framing is precise: <em>dealing</em> versus <em>doing</em>. Structure versus execution. The distinction sounds pedantic until you've spent a week debugging a system where someone treated them as the same thing.</p>
+
+    <!-- ── 03 ───────────────────────────────────────────── -->
+    <div class="section-accent"><span class="section-num">03</span></div>
+    <h2 class="section-heading" id="s3">The Two-by-Two Nobody Puts in the Textbook</h2>
+
+    <p>The two properties are orthogonal — you can have either without the other. Each quadrant has a different performance profile, a different correctness model, and a different class of bugs waiting inside it.</p>
+
+    <div class="quad-grid">
+      <div class="quad qc">
+        <span class="quad-tag">Concurrent · Not Parallel</span>
+        <h4>One worker, many tasks</h4>
+        <p>Node.js event loop, Python asyncio, Go on GOMAXPROCS=1, cooperative OS scheduling. Single thread handles many tasks by interleaving. Excellent for I/O-bound work — the CPU is rarely the bottleneck. Adding cores doesn't help unless you fork processes.</p>
+      </div>
+      <div class="quad qcp">
+        <span class="quad-tag">Concurrent + Parallel</span>
+        <h4>Many workers, many tasks each</h4>
+        <p>Go goroutines across all cores, Java virtual threads + ForkJoinPool, async I/O + worker thread pool. Maximum throughput. Also maximum coordination complexity — this is where most correctness bugs live. Amdahl's Law applies in full force here.</p>
+      </div>
+      <div class="quad qn">
+        <span class="quad-tag">Neither</span>
+        <h4>One worker, one task at a time</h4>
+        <p>A synchronous single-threaded server, a bash pipeline, a simple CLI script. Predictable, debuggable, and correct by default. Underestimated as a deliberate architecture choice at moderate scale, where coordination overhead of the alternatives isn't worth it.</p>
+      </div>
+      <div class="quad qp">
+        <span class="quad-tag">Parallel · Not Concurrent</span>
+        <h4>Many workers, one task each</h4>
+        <p>SIMD vectorisation, GPU kernel execution, naive fork with fully independent work, data parallelism on disjoint partitions. Only works for embarrassingly parallel problems — no shared state, no coordination. The moment tasks need to communicate, you need concurrency design too.</p>
+      </div>
+    </div>
+
+    <p>The most common mistake lives in the bottom-right quadrant: treating a problem as embarrassingly parallel by adding threads, when it has shared state that requires concurrency design. The result is parallel form with sequential performance — every thread immediately serialises on the shared resource. You've paid the cost of both models and received the benefits of neither.</p>
+
+    <blockquote>
+      <p>Adding threads to a system with shared state doesn't create parallelism. It creates a queue in front of a lock — and gives that queue sixteen entrances instead of one.</p>
+    </blockquote>
+
+    <!-- ── 04 ───────────────────────────────────────────── -->
+    <div class="section-accent"><span class="section-num">04</span></div>
+    <h2 class="section-heading" id="s4">Amdahl's Law: The Ceiling Parallelism Can't Escape</h2>
+
+    <p>Assume you've correctly identified a parallel workload. You've added cores. You're measuring speedup. Here is the law that governs what you can actually achieve — and it has no sympathy for your hardware budget.</p>
+
+    <div class="visualization">
+      <span class="viz-label">Amdahl's Law — the theoretical speedup limit</span>
+      <pre>
+<span class="kw">S(N)</span> = <span class="vl">1 / ((1 - P) + P/N)</span>
+
+<span class="c">S  →  theoretical speedup over single-core baseline</span>
+<span class="c">N  →  number of processors</span>
+<span class="c">P  →  fraction of work that can be parallelised (0 to 1)</span>
+
+<span class="c">If P = 0.80 (80% parallelisable):</span>
+<span class="c">  N =  2  →  1.67×  |  N =  4  →  2.50×</span>
+<span class="c">  N =  8  →  4.00×  |  N =  ∞  →  5.00×  ← hard ceiling. Always.</span>
+
+<span class="c">If P = 0.95 (95% parallelisable):</span>
+<span class="c">  N =  2  →  1.90×  |  N =  8  →  5.93×</span>
+<span class="c">  N = 64  →  14.6×  |  N =  ∞  →  20×   ← ceiling at 5% serial fraction.</span>
+
+<span class="c">The serial fraction (1 - P) sets the ceiling. Always. Regardless of cores.</span></pre>
+    </div>
+
+    <div class="stats-bar">
+      <div class="stats-grid">
+        <div class="stats-cell"><span class="num warning">5×</span><div class="label">ceiling — 20% serial code (∞ cores)</div></div>
+        <div class="stats-cell"><span class="num warning">10×</span><div class="label">ceiling — 10% serial code (∞ cores)</div></div>
+        <div class="stats-cell"><span class="num success">20×</span><div class="label">ceiling — 5% serial code (∞ cores)</div></div>
+        <div class="stats-cell"><span class="num success">100×</span><div class="label">ceiling — 1% serial code (∞ cores)</div></div>
+      </div>
+    </div>
+
+    <p>The implication is uncomfortable: the serial fraction — not the parallel fraction — is what your architecture is bounded by. Every lock acquisition is a serial section. Every global counter, every shared queue, every checkpoint write is a serial section. Code that looks parallel but converges on a shared resource has a higher serial fraction than it appears, and a lower ceiling than you've planned for.</p>
+
+    <p>This is why you can throw 64 cores at a workload and get 8× speedup and wonder where the other 8× went. It went into the 10% of your code that can't be parallelised — the logging, the coordination, the final merge, the network call that everything else depends on completing before the next step begins.</p>
+
+    <!-- ── 05 ───────────────────────────────────────────── -->
+    <div class="section-accent"><span class="section-num">05</span></div>
+    <h2 class="section-heading" id="s5">The Coordination Tax</h2>
+
+    <p>Amdahl's Law models your code as if the parallel parts were free and the serial parts were the only cost. In reality, parallelism itself has a cost: the work required to coordinate independent workers. This is the coordination tax, and it erodes your speedup even before the serial fraction takes its cut.</p>
+
+    <h3 class="section-subheading">Locks as Hidden Serial Sections</h3>
+
+    <p>Every mutex in a parallel critical path is a serial section in practice, not just in theory. When 16 threads contend on the same lock, 15 are waiting while 1 executes the protected block. That's 15 cores parked, doing nothing, consuming scheduling overhead. The lock doesn't just protect state — it serialises execution. The effective utilisation of your parallel hardware during that window is 1/16.</p>
+
+    <h3 class="section-subheading">False Sharing: The Invisible Serialiser</h3>
+
+    <p>Two threads. Entirely separate data. No shared variables. No locks. They still interfere — if their data shares a CPU cache line.</p>
+
+    <div class="visualization">
+      <span class="viz-label">False sharing — serialisation with zero shared variables</span>
+      <pre>
+  struct Counters {
+      int thread_0_count;  <span class="c">// offset  0  ┐</span>
+      int thread_1_count;  <span class="c">// offset  4  ├─ same 64-byte cache line</span>
+      int thread_2_count;  <span class="c">// offset  8  │</span>
+      int thread_3_count;  <span class="c">// offset 12  ┘</span>
+  }
+
+  <span class="c">Thread 0 writes thread_0_count.</span>
+  <span class="c">Thread 1 writes thread_1_count.</span>
+  <span class="c">They share no variable. They do not know each other exists.</span>
+
+  <span class="hl">Hardware's view:</span>
+  <span class="c">Both writes hit the same cache line.</span>
+  <span class="c">MESI coherence protocol invalidates that line on every write.</span>
+  <span class="c">Each core waits for exclusive ownership before proceeding.</span>
+  <span class="c">16 threads × 1 shared cache line = sequential writes in parallel hardware.</span>
+
+  <span class="vl">Fix: pad each counter to fill its own 64-byte cache line.</span>
+  <span class="c">Alignment is not premature optimisation — it is correctness at the hardware layer.</span></pre>
+    </div>
+
+    <p>False sharing is endemic to naive parallel code and invisible without profiling. You've written code with zero shared state, and the hardware has serialised it anyway because the memory layout placed different workers' data on the same physical cache line. Padding structs to align on cache line boundaries is not a micro-optimisation — it's the difference between parallel code that scales and parallel code that runs slower than its sequential equivalent under high thread counts.</p>
+
+    <h3 class="section-subheading">The Gunther Correction: When More Threads Make Things Worse</h3>
+
+    <p>Amdahl's Law assumes coordination is free. Neil Gunther's Universal Scalability Law adds the cost back in: a contention coefficient (serialisation from shared resources) and a coherence coefficient (the cost of keeping shared state consistent across cores). At high thread counts, the coherence cost grows as N² — quadratically. Beyond some inflection point, adding more threads actively slows the system down.</p>
+
+    <p>This is superlinear slowdown. It's real. It shows up in lock-heavy code under high parallelism, in databases with too many connections, in distributed systems with too many nodes writing to shared coordination state. The chart that was supposed to show linear speedup bends over and starts going the wrong direction. Adding hardware makes the system slower — not because the hardware is wrong, but because the design assumed coordination was free.</p>
+
+    <!-- ── 06 ───────────────────────────────────────────── -->
+    <div class="section-accent"><span class="section-num">06</span></div>
+    <h2 class="section-heading" id="s6">I/O-Bound vs CPU-Bound: The Decision That Precedes Architecture</h2>
+
+    <p>Most systems are either waiting for something (I/O-bound) or computing something (CPU-bound). The model you choose should follow directly from which one they are. Choosing the wrong model for the workload type is the root cause of most of the complexity described above.</p>
+
+    <div class="callout">
+      <div class="callout-head">I/O-Bound workloads — concurrency is the answer</div>
+      <ul>
+        <li>The CPU is idle most of the time — waiting for network, disk, database, or external API. The bottleneck is latency on external calls, not compute cycles.</li>
+        <li>Concurrency eliminates that idle time by interleaving tasks. A single thread can handle hundreds of concurrent I/O operations if structured correctly.</li>
+        <li>Parallelism adds marginal benefit — you need more cores only if CPU processing <em>between</em> I/O calls is itself significant.</li>
+        <li><strong>Right models:</strong> async/await, event loops (Node.js, nginx), non-blocking I/O with a small thread pool, Go goroutines for network services.</li>
+        <li><strong>Wrong model:</strong> one thread per connection — wastes memory on stack allocation and OS scheduling for threads that spend 99% of their time blocked.</li>
+      </ul>
+    </div>
+
+    <div class="callout warning">
+      <div class="callout-head">CPU-Bound workloads — parallelism is the answer</div>
+      <ul>
+        <li>The CPU is fully utilised — encoding video, running ML inference, compiling code, computing hashes. The bottleneck is compute cycles, not waiting.</li>
+        <li>Concurrency alone doesn't help: if you have one core and two CPU-intensive tasks, interleaving them takes twice as long as running one sequentially.</li>
+        <li>Parallelism across multiple cores or machines is the only way to increase throughput — up to the Amdahl ceiling set by your serial fraction.</li>
+        <li><strong>Right models:</strong> worker thread pools sized to core count, process-level parallelism, SIMD for tight loops, distributed map-reduce for large data.</li>
+        <li><strong>Wrong model:</strong> async I/O frameworks — structured for I/O interleaving, they add overhead without benefit when the bottleneck is pure compute.</li>
+      </ul>
+    </div>
+
+    <div class="matrix">
+      <div class="matrix-header">
+        <div>Model</div>
+        <div>Type</div>
+        <div>Best for</div>
+        <div>Examples</div>
+      </div>
+      <div class="matrix-row">
+        <div class="label">Event loop (single-threaded async)</div>
+        <div><span class="badge badge-warn">Concurrent</span></div>
+        <div>High-connection I/O services</div>
+        <div>nginx, Node.js, Redis</div>
+      </div>
+      <div class="matrix-row">
+        <div class="label">Thread-per-task, blocking I/O</div>
+        <div><span class="badge-info">Parallel</span></div>
+        <div>Request isolation, mixed I/O + CPU</div>
+        <div>Apache httpd, Java servlets</div>
+      </div>
+      <div class="matrix-row">
+        <div class="label">Goroutines / virtual threads</div>
+        <div><span class="badge badge-success">Both</span></div>
+        <div>High-throughput network services</div>
+        <div>Go, Java 21, Erlang</div>
+      </div>
+      <div class="matrix-row">
+        <div class="label">Worker pool + async I/O</div>
+        <div><span class="badge badge-success">Both</span></div>
+        <div>Mixed I/O-bound + CPU-bound work</div>
+        <div>Tokio (Rust), Node.js worker_threads</div>
+      </div>
+      <div class="matrix-row">
+        <div class="label">Data parallelism / SIMD</div>
+        <div><span class="badge-info">Parallel</span></div>
+        <div>Embarrassingly parallel compute</div>
+        <div>ML inference batching, video encoding</div>
+      </div>
+      <div class="matrix-row">
+        <div class="label">Actor model</div>
+        <div><span class="badge badge-success">Both</span></div>
+        <div>Distributed state, fault isolation</div>
+        <div>Erlang/OTP, Akka, Pony</div>
+      </div>
+      <div class="matrix-row">
+        <div class="label">Sequential single-threaded</div>
+        <div><span class="badge-muted">Neither</span></div>
+        <div>Low volume, correctness-critical</div>
+        <div>Ledger writes, ordered event processors</div>
+      </div>
+    </div>
+
+    <p>Every architecture decision here should start with two questions, answered in order. First: where is the bottleneck? CPU, I/O, memory bandwidth, or network? The answer determines the model. I/O-bound systems need concurrency. CPU-bound systems need parallelism. Systems that are both need both — designed in layers, not blended into the same component.</p>
+
+    <p>Second: what does it cost to coordinate? Every piece of shared state between concurrent or parallel workers is a serial section waiting to happen. Identify it before you design the parallelism, because the shared state is where Amdahl's ceiling lives and where false sharing hides.</p>
+
+    <div class="closing-banner">
+      <p>Concurrent means structured to interleave. Parallel means structured to simultaneously execute. Every system you build has a bottleneck that tells you which one it needs. The question is whether you listen before you design — or after you debug.</p>
+    </div>
+
+  </div>
+</article>
+
+<!-- ── FOOTER ─────────────────────────────────────────────── -->
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-name">Pradeep A. Dalvi</div>
+    <div class="footer-links">
+      <a href="https://linkedin.com/in/pradeep">LinkedIn</a>
+      <a href="https://github.com/pradeepdalvi">GitHub</a>
+      <a href="https://pradeepdalvi.com/blogs/">All Blogs</a>
+    </div>
+    <div class="footer-copy">© 2026 Pradeep A. Dalvi · All rights reserved</div>
+  </div>
+</footer>
+
+</body>
+</html>
