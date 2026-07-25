@@ -758,3 +758,129 @@ strong { font-weight: 500; color: var(--color-text-primary); }
 .metric-badge { display: inline-block; font-family:  var(--font-mono); font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.5rem; letter-spacing: 0.04em; }
 .metric-card h4 { font-family: var(--font-serif); font-size: 1rem; font-weight: 500; color: var(--text); margin-bottom: 0.4rem; }
 .metric-card p { font-family: var(--font-serif); font-size: 0.9rem; color: var(--text-muted); line-height: 1.55; margin: 0; }
+
+/* ─────────────────────────────────────────────────
+   NEW styles only — everything else is in main.css
+   ───────────────────────────────────────────────── */
+
+/* 1 · Label above a .visualization block */
+.viz-label {
+    display: block;
+    font-family: var(--font-mono);
+    font-size: 0.95rem;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--color-text-warning);
+    margin-bottom: 0.6rem;
+}
+
+/* 2 · Syntax-highlight spans inside .visualization <pre> */
+.c  { color: var(--color-text-secondary); }
+.kw { color: var(--color-text-info); }
+.vl { color: var(--accent-green); }
+.hl { color: var(--color-text-info); }
+
+/* 3 · 3-column variant of .stats-grid (M/M/1 inline row) */
+.stats-grid-3 { grid-template-columns: repeat(3, 1fr); }
+
+/* 4 · 3-column variant of .matrix rows (Call Type | Strategy | Rationale) */
+.matrix-header.cols-3,
+.matrix-row.cols-3    { grid-template-columns: 1.5fr 0.9fr 2fr; }
+
+/* 5 · .badge variants set border-color but base .badge has no border shorthand */
+.badge-warn,
+.badge-success,
+.badge-danger { border: 1px solid; }
+
+/* 6 · Warning-flavoured .callout for "Fail Fast" conditions */
+.callout.warning                  { border-color: var(--color-border-warning); }
+.callout.warning .callout-head    { color: var(--color-text-warning); }
+.callout.warning ul li::before    { color: var(--accent); }
+
+/* Inline <code> in dark theme (not in main.css) */
+.prose code {
+    font-family: var(--font-mono);
+    font-size: 0.85em;
+    background: rgba(255,255,255,0.08);
+    color: var(--accent);
+    padding: 0.1em 0.35em;
+    border-radius: 3px;
+}
+
+/* Info-coloured badge for "Parallel" model type */
+.badge-info {
+    display: inline-block;
+    font-size: 14px;
+    font-weight: 500;
+    padding: 2px 7px;
+    border-radius: 4px;
+    vertical-align: middle;
+    border: 1px solid rgba(0,188,212,0.3);
+    background: rgba(0,188,212,0.08);
+    color: var(--color-text-info);
+}
+
+/* Neutral badge for "Neither" model type */
+.badge-muted {
+    display: inline-block;
+    font-size: 14px;
+    font-weight: 500;
+    padding: 2px 7px;
+    border-radius: 4px;
+    vertical-align: middle;
+    border: 1px solid rgba(255,255,255,0.1);
+    background: rgba(255,255,255,0.06);
+    color: var(--text-muted);
+}
+
+/* 2×2 quadrant grid (Concurrent / Parallel combinations) */
+.quad-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+    margin: 1.5rem 0;
+}
+
+.quad {
+    border: 1px solid var(--border);
+    border-radius: var(--border-radius-lg);
+    padding: 1.2rem 1.4rem;
+    background: var(--bg-card);
+}
+
+.quad-tag {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    display: block;
+    margin-bottom: 0.5rem;
+}
+
+.quad h4 {
+    font-size: 1rem;
+    font-weight: 500;
+    color: var(--color-text-primary);
+    margin-bottom: 0.4rem;
+}
+
+.quad p {
+    font-size: 0.875rem;
+    color: var(--text-muted);
+    line-height: 1.6;
+    margin: 0;
+}
+
+/* Quadrant colour variants */
+.quad.qc  { border-color: var(--color-border-warning); background: var(--color-background-warning); }
+.quad.qc  .quad-tag { color: var(--accent); }
+
+.quad.qcp { border-color: var(--color-border-success); background: var(--color-background-success); }
+.quad.qcp .quad-tag { color: var(--accent-green); }
+
+.quad.qp  { border-color: rgba(0,188,212,0.3); background: rgba(0,188,212,0.07); }
+.quad.qp  .quad-tag { color: var(--color-text-info); }
+
+.quad.qn  .quad-tag { color: var(--text-dim); }
