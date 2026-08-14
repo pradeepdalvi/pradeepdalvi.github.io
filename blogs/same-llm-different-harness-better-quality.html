@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-DQ4TX83NWC"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-DQ4TX83NWC');
+  </script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="/css/blogs.css">
+  <link rel="icon" type="image/x-icon" href="/favicon.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="48x48" href="/favicon-48x48.png">
+  <link rel="manifest" href="/manifest.webmanifest" crossOrigin="use-credentials">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="theme-color" content="#fff">
+  <meta name="application-name" content="Pradeep A. Dalvi">
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon-180x180.png">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Pradeep A. Dalvi">
+<title>Same LLM, Different Quality | Blogs — Pradeep A. Dalvi</title>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="header-inner">
+    <a class="site-name" href="https://pradeepdalvi.com/index">Pradeep A. Dalvi</a>
+    <nav class="header-links">
+      <a href="https://pradeepdalvi.com/blogs/">Blogs</a>
+    </nav>
+  </div>
+</header>
+
+<div class="hero">
+  <div class="hero-tags">
+    <span class="tag tag-payments">AI Engineering</span>
+    <span class="tag tag-arch">Agent Architecture</span>
+    <span class="tag tag-resilience">Generative Systems</span>
+    <span class="tag-sep">·</span>
+    <span class="tag-date">August 2026</span>
+  </div>
+
+  <h1 class="hero-title">Same LLM, Different Harness.<br/>
+    <em>The Model was never the whole product.</em></h1>
+
+  <div class="hero-deck">
+      “People who are really serious about software should make their own hardware.”
+    <cite>— Alan Kay</cite>
+  </div>
+
+  <div class="author-strip">
+    <img class="thumbnail" src="https://pradeepdalvi.com/images/actor_thumbnail.jpeg" alt="Pradeep A. Dalvi">
+    <div>
+      <div class="author-name">Pradeep A. Dalvi</div>
+      <div class="author-role">Principal Systems Architect · Distributed Systems &amp; Payments</div>
+    </div>
+    <div class="read-time">14 min read</div>
+  </div>
+</div>
+
+<section class="stats-bar">
+  <div class="metric-grid">
+    <div class="metric-card">
+      <h4 style="color: var(--color-text-danger)">Context <span class="metric-badge">/ RAM</span></h4>
+      <p>What the harness loads before each call — files, prior results, history — is the model's entire working memory. Same weights, different context, different answer.</p>
+    </div>
+    <div class="metric-card">
+      <h4 style="color: var(--color-text-success)">Tools <span class="metric-badge">/ BUS</span></h4>
+      <p>The model can only describe an action until something executes it. Tool access is what turns a completion into a file that actually exists on disk.</p>
+    </div>
+    <div class="metric-card">
+
+      <h4 style="color: var(--color-text-warning)">Orchestration <span class="metric-badge">/ LOOP</span></h4>
+      <p>One shot versus repeated observe-and-retry. Whether a failed step gets a second attempt is a harness decision, not a model one.</p>
+    </div>
+    <div class="metric-card">
+      <h4 style="color: var(--color-text-info-light)">Verification <span class="metric-badge">/ COOLING</span></h4>
+      <p>A generative system's output isn't guaranteed to repeat itself. Something has to re-open the artifact and check it before calling the job done.</p>
+    </div>
+  </div>
+</section>
+
+<article class="article">
+  <div class="prose">
+
+    <nav class="toc">
+      <div class="toc-head">In this article</div>
+      <ol>
+        <li><a href="#s1">The Spec Sheet Doesn't Ship a Laptop</a></li>
+        <li><a href="#s2">Deterministic Silicon, Generative Silicon</a></li>
+        <li><a href="#s3">The Model Is the CPU</a></li>
+        <li><a href="#s4">The Harness Is the Computer</a></li>
+        <li><a href="#s5">Inside the Harness: What's Actually Running</a></li>
+        <li><a href="#s6">Where This Shows Up: Building a Spreadsheet</a></li>
+        <li><a href="#s7">Cooling Is the Verification Loop</a></li>
+        <li><a href="#s8">What to Actually Compare</a></li>
+      </ol>
+    </nav>
+
+    <div id="s1">
+      <div class="section-accent"><span class="section-num">01</span></div>
+      <h2 class="section-heading">The Spec Sheet Doesn't Ship a Laptop</h2>
+      <p>Take two laptops off the shelf with the identical CPU — same silicon, same clock speed, same core count, same cache. Benchmark them and you'll get two different numbers. One has fast RAM and a real heatsink; the other has half the memory and a fan that gives up under load. One never throttles. The other hits 95°C in ninety seconds and quietly halves its own clock speed to survive.</p>
+      <p>Nobody looks at that gap and concludes the CPU lied about its spec sheet. The chip did exactly what it was rated for. What changed was everything sitting around it — the parts that decide whether the chip's raw capability actually reaches the keyboard, or gets throttled, starved, and swallowed before it does.</p>
+      <p>This is the argument I made to an engineer recently, after suggesting a coding agent over an AI-augmented IDE for generating a non-trivial <code>.xlsx</code> file. His pushback was fair: <em>“ultimately, how would it be different when the underlying LLMs are the same?”</em> It's the right question. It's also the CPU question, asked about a different kind of chip.</p>
+    </div>
+
+    <hr class="divider">
+
+    <div id="s2">
+      <div class="section-accent"><span class="section-num">02</span></div>
+      <h2 class="section-heading">Deterministic Silicon, Generative Silicon</h2>
+
+      <p>Before comparing harnesses, it's worth being precise about what kind of chip is inside the box, because it isn't the same kind of chip the CPU analogy started with — and that difference is exactly why the harness has to work so much harder.</p>
+
+      <p>A classical CPU executing an ALU instruction is deterministic by construction. Add two registers and you get one answer, every time, on every run, forever — the same inputs producing the same outputs is the entire basis on which software engineering works. It's why a unit test written once stays true. It's why a stack trace points at a real, reproducible line. Correctness is a property you prove once and then trust.</p>
+      <p>A large language model doesn't work that way, and not just because someone left the temperature dial turned up. Inference means sampling from a probability distribution over the next token. At temperature above zero, the same prompt legitimately produces different completions on different calls — that's not a bug, it's the mechanism. And even at temperature zero, with supposedly deterministic “greedy” decoding, floating-point arithmetic on GPUs is not strictly associative: batching, kernel scheduling, and parallel reduction order can shift rounding just enough to change which token wins a close race. Reproducibility isn't guaranteed by the hardware the way it is for a CPU add instruction — it has to be engineered on top, if you want it at all.</p>
+        <figure>
+            <img src="/images/cpu_vs_llm_determinism.png" alt="Infographic illustrating how Deterministic Silicon & Generative Silicon work.">
+            <figcaption>Figure 1: Deterministic Silicon, Generative Silicon.</figcaption>
+        </figure>
+      <div class="matrix">
+        <div class="matrix-header">
+          <div>Property</div><div>Traditional Software</div><div>Generative Model</div>
+        </div>
+        <div class="matrix-row">
+          <div class="label">Same input, same output</div><div>Guaranteed by the hardware</div><div>Not guaranteed — sampling + floating-point order</div>
+        </div>
+        <div class="matrix-row">
+          <div class="label">Typical failure mode</div><div>Crash, exception, stack trace</div><div>Confident, plausible-looking wrong answer</div>
+        </div>
+        <div class="matrix-row">
+          <div class="label">How you gain confidence</div><div>Unit test once, trust forever</div><div>Verify the specific output, every time</div>
+        </div>
+        <div class="matrix-row">
+          <div class="label">What “correct” means</div><div>Matches the specification exactly</div><div>Is <em>this instance</em> good enough to ship</div>
+        </div>
+      </div>
+
+      <div class="lesson-block">
+        <p><strong>The consequence:</strong> in a deterministic system, verification is a one-time cost — you write the test, it holds. In a generative system, the model's own output is not a fixed, checkable artifact by default. The harness's execution-and-verification layer is the closest thing to a repeatable test a generative system actually has — which is exactly why that layer matters so much more here than it ever did for classical software.</p>
+      </div>
+    </div>
+
+    <hr class="divider">
+
+    <div id="s3">
+      <div class="section-accent"><span class="section-num">03</span></div>
+      <h2 class="section-heading">The Model Is the CPU</h2>
+      <p>A large language model is, structurally, a very good next-token predictor with a very large amount of world knowledge compressed into its weights. That's the silicon. It is genuinely where most of the “intelligence” lives, in the same sense that the CPU is genuinely where most of a computer's raw compute lives. Two products calling the same model checkpoint are, at that layer, identical. Same weights, same training, same reasoning ceiling.</p>
+      <p>But a model in isolation cannot open a file. It cannot run Python. It cannot look at the workbook it just described and notice that the totals don't add up. It generates tokens — text that <em>describes</em> an action, or text that <em>is</em> a piece of code — and then stops. What happens to those tokens next is not the model's decision. That decision belongs to whatever is holding the model.</p>
+      <div class="result-banner">
+        <div class="rb-label">The tell</div>
+        <p>If two products can be compared by asking “which LLM does it use,” you've already conceded that the LLM is a component, not the product. Nobody buys a laptop by asking which CPU die it uses and stopping there.</p>
+      </div>
+    </div>
+
+    <hr class="divider">
+
+    <div id="s4">
+      <div class="section-accent"><span class="section-num">04</span></div>
+      <h2 class="section-heading">The Harness Is the Computer</h2>
+      <div class="defn-block">
+        <span class="defn-label">Agent Harness, n. phr.</span>
+        <div class="defn-body">the system prompt, context-assembly logic, tool definitions, orchestration loop, sampling configuration, memory, and permission boundaries wrapped around a model checkpoint. The model is one input to this system, not the system itself.</div>
+      </div>
+      <p>Everything wrapped around the model is usually called the <strong>agent harness</strong> — the system prompt, the tool definitions, the context assembled before each call, the loop that decides what happens after each response, the permissions on what it's allowed to touch. It's the motherboard, the RAM, the cooling, the storage bus. It doesn't make the CPU smarter. It determines how much of the CPU's capability actually turns into useful work.</p>
+      <div class="viz-label">Agentic GenAI Core Architecture</div>
+      <div class="visualization"><pre style="margin:0; font-size: 0.85rem;">
+┌───────────────────────────────────────────────────────────────────┐
+│                           USER GOAL                               │
+│               "Generate a quarterly sales .xlsx"                  │
+└────────────────────────────────┬──────────────────────────────────┘
+                                 │
+                                 ▼
+┌───────────────────────────────────────────────────────────────────┐
+│                        CONTEXT ASSEMBLY                           │
+│  • Task framing: xlsx skill loaded, openpyxl/xlsx tool available  │
+│  • Ephemeral state: uploaded source data (CSV/sheet), if any      │
+│  • Episodic memory: prior turns in this task (columns agreed on)  │
+│  • Long-term retrieval: user's past formatting preferences        │
+└────────────────────────────────┬──────────────────────────────────┘
+                                 │
+                                 ▼
+┌───────────────────────────────────────────────────────────────────┐
+│                         LLM REASONER                              │
+│        Thought: "Need to read source data, compute totals,        │
+│                 then write formatted .xlsx"                       │
+└─────────────────┬───────────────────────────────┬─────────────────┘
+                  │                               │
+         (task not done yet)               (file built & verified)
+                  │                               │
+                  ▼                               ▼
+   ┌─────────────────────────┐      ┌────────────────────────────┐
+   │      TOOL EXECUTOR      │      │       FINAL ANSWER         │
+   │     Calls: bash / xlsx  │      │  present_files → user gets │
+   │     library functions   │      │  the .xlsx download link   │
+   └─────────────┬───────────┘      └────────────────────────────┘
+                 │
+                 ▼
+   ┌─────────────────────────────────────────────┐
+   │              ENVIRONMENT                    │
+   │  • Reads uploaded data file                 │
+   │  • Writes .xlsx via xlsx skill/library      │
+   │  • Runs a check (open file, validate cells) │
+   └──────────────────────┬──────────────────────┘
+                          │
+                          ▼
+   ┌────────────────────────────────────────────┐
+   │              OBSERVATION                   │
+   │  • "Sheet written, 3 columns, 40 rows"     │
+   │  • Reflection: totals row missing → replan │
+   └──────────────────────┬─────────────────────┘
+                          │
+                          │  ↻ loop back — re-assemble context with
+                          │    the fresh file state (not a stale log
+                          │    entry saying "file was written")
+                          ▼
+              [ back to CONTEXT ASSEMBLY ]</pre>
+      </div>
+      <p>This is what Alan Kay's line is really getting at, read outside its original hardware context. Being serious about the outcome means owning the peripherals — not just consuming the chip someone else shipped you. A product that only calls a model API and passes the raw completion straight back to the user hasn't built any hardware at all. It's running someone else's reference board with no cooling and no bus, and hoping the die never needs either.</p>
+
+      <div class="pillar-grid">
+        <div class="pillar-card">
+          <div class="pillar-icon"  style="color: var(--color-text-danger); font-size: 2rem;">▤</div>
+          <h4>RAM — Context Management</h4>
+          <p>A CPU starved of memory bandwidth spends its cycles waiting, not computing. A model starved of the right context spends its reasoning guessing, not knowing. What a harness loads before each call is the model's effective working memory.</p>
+        </div>
+        <div class="pillar-card">
+          <div class="pillar-icon"style="color: var(--color-text-warning); font-size: 2rem;">⇄</div>
+          <h4>Bus — Tool Access</h4>
+          <p>A CPU with no disk controller can compute beautifully and persist nothing. A model with no file-write tool can reason beautifully about a spreadsheet and produce nothing but a description of one.</p>
+        </div>
+        <div class="pillar-card">
+          <div class="pillar-icon" style="color: var(--color-text-info); font-size: 2rem;">❄</div>
+          <h4>Cooling — Verification</h4>
+          <p>A CPU without cooling doesn't stop — it throttles silently and keeps returning output that looks fine. An agent without a verification step doesn't stop either. It keeps producing plausible artifacts, and nothing flags the moment they went wrong.</p>
+        </div>
+      </div>
+    </div>
+
+    <hr class="divider">
+
+    <div id="s5">
+      <div class="section-accent"><span class="section-num">05</span></div>
+      <h2 class="section-heading">Inside the Harness: What's Actually Running</h2>
+      <p>“Context, tools, loop” is the right shape, but it's worth opening the box, because this is where two products with the same checkpoint diverge in practice.</p>
+
+      <h3 class="section-subheading">The model is stateless. The harness is not.</h3>
+      <p>Every single API call to the model is independent — there is no session, no memory, no persistence on the model's side between one request and the next. The entire conversation — system prompt, prior turns, every previous tool result — is re-sent, in full, as one message array, on every call. The model doesn't “remember” using a tool three turns ago; it re-reads the transcript that says it did. Statefulness is not a property of the model. It's a property of whatever is assembling that array before each call — which means two harnesses can hand the identical model two different transcripts of the “same” conversation, and get two different agents out of it.</p>
+
+      <div class="viz-label">Inside ReAct (Reason + Act) Loop</div>
+      <div class="visualization"><pre style="margin:0; font-size: 0.85rem;">
+┌──────────────────────────────────────────────────────────────┐
+│                                                              │
+│   1. PERCEIVE / OBSERVE                                      │
+│      Current state + previous observation                    │
+│                                                              │
+│   2. REASON (Thought)                                        │
+│      LLM thinks: “What do I know? What should I do next?”    │
+│                                                              │
+│   3. ACT                                                     │
+│      Call a tool / write code / edit file / search, etc.     │
+│                                                              │
+│   4. OBSERVE                                                 │
+│      Get real result from the environment                    │
+│                                                              │
+│   5. Check: Goal achieved?                                   │
+│      • Yes → Final Answer                                    │
+│      • No  → Go back to step 1                               │
+│                                                              │
+└──────────────────────────────────────────────────────────────┘</pre></div>
+
+      <div class="viz-label">Tool-calling — the actual request/response cycle</div>
+      <div class="visualization"><pre style="margin:0; font-size: 0.85rem;"><span class="c">// Simplified structured tool-use loop</span>
+<span class="kw">messages</span> = [system_prompt, user_request]
+<span class="kw">tools</span>    = [{name: <span class="vl">"read_file"</span>, schema: {...}},
+             {name: <span class="vl">"run_shell"</span>, schema: {...}},
+             {name: <span class="vl">"write_file"</span>, schema: {...}}]
+
+<span class="hl">loop:</span>
+  response = model.call(messages, tools)
+
+  <span class="c">// model emits either plain text, or a structured tool_use block —</span>
+  <span class="c">// never actually executes anything itself</span>
+  <span class="kw">if</span> response.type == <span class="vl">"tool_use"</span>:
+      result = harness.execute(response.tool_name, response.args)
+      messages.append(response)                    <span class="c">// the call</span>
+      messages.append({role: <span class="vl">"tool_result"</span>, content: result})  <span class="c">// the outcome</span>
+      <span class="hl">continue</span>   <span class="c">// re-invoke with the new transcript</span>
+  <span class="kw">else</span>:
+      <span class="hl">return</span> response.text   <span class="c">// model signalled it's done</span></pre></div>
+
+      <p>Notice what the model never does anywhere in that loop: touch a file, spawn a process, or know whether its own code ran successfully. It emits a request to do so, formatted against a JSON schema the harness defined. The harness is what turns that request into a real side effect and reports back what actually happened. Swap the harness and keep the model fixed, and the set of tools offered, how failures are reported back, and what triggers another iteration versus a final answer, all change — even though the “brain” making the decisions is byte-identical.</p>
+
+      <div class="step-label">The loop, step by step</div>
+      <div class="steps">
+        <div class="step"><div class="step-num">1</div><div class="step-body"><span class="step-title">Assemble context</span><p class="step-desc">Harness decides what goes in the array this turn — which files, which prior results, how much history survives <strong>compaction</strong> once the window fills up.</p></div></div>
+        <div class="step"><div class="step-num">2</div><div class="step-body"><span class="step-title">Model reasons and (maybe) calls a tool</span><p class="step-desc">Sampling parameters — temperature, top_p, max tokens — are set by the harness, not the model. Same weights, different knobs, different variance run to run.</p></div></div>
+        <div class="step"><div class="step-num">3</div><div class="step-body"><span class="step-title">Harness executes, inside a sandbox</span><p class="step-desc">Permission boundaries live here: an allow-list of tools, a filesystem jail, a human-approval gate before anything destructive runs.</p></div></div>
+        <div class="step"><div class="step-num">4</div><div class="step-body"><span class="step-title">Result appended, loop or return</span><p class="step-desc">Whether a failed tool call triggers a retry, a different tool, or a shrug back to the user is harness logic — the model only sees whatever transcript it's handed next.</p></div></div>
+      </div>
+
+      <p>None of this is exotic — it's the standard shape behind most production coding agents. But it means “same LLM” has already quietly assumed away five decisions: what context reaches it, what tools it's offered, what sampling settings drive its variance, what sandbox constrains its actions, and what happens when a step fails. Every one of those is a harness choice.</p>
+    </div>
+
+    <hr class="divider">
+
+    <div id="s6">
+      <div class="section-accent"><span class="section-num">06</span></div>
+      <h2 class="section-heading">Where This Shows Up: Building a Spreadsheet</h2>
+      <p>Zoom out and the whole pipeline from request to file looks like this — the LLM is one box out of five, and it never touches the last two:</p>
+      <figure>
+        <img src="/images/agentic_ai_processing.jpg" alt="Infographic illustrating how Agentic GenAI processes the request.">
+        <figcaption>Figure 2: Request to .xlsx — the full pipeline.</figcaption>
+      </figure>
+
+      <p>The “Agent / IDE layer” box is doing everything discussed in the last three sections — it decides what the LLM sees, what actions it's even allowed to propose, and whether the runtime's output gets checked before it's called done. Swap that one box between two products and the bottom four boxes can behave completely differently, even when the LLM box is byte-identical. Here's what that divergence actually looks like for a financial model built from a folder of CSVs — same weights both times.</p>
+
+      <div class="viz-label">Harness A vs. Harness B — same checkpoint, different outcome</div>
+      <div class="visualization"><pre style="margin:0; font-size: 0.85rem;"><span class="c">// Harness A — no execution tool, no file access</span>
+model.generate(<span class="vl">"Create an Excel workbook with a P&amp;L, revenue and expenses."</span>)
+<span class="c">→ returns openpyxl source as text.</span>
+<span class="c">→ nothing executes it.</span>
+<span class="c">→ nobody checks whether Revenue − Expenses actually equals the EBITDA cell.</span>
+
+<span class="c">// Harness B — shell + file tools + a verify step in the loop</span>
+1. read_file(revenue.csv, expenses.csv)
+2. write_file(build_model.py)
+3. run_shell(<span class="vl">"python build_model.py"</span>)
+4. read_file(financial_model.xlsx)        <span class="c">// open what it just built</span>
+5. <span class="hl">detect: EBITDA cell off by 3,000</span>
+6. edit build_model.py, re-run, re-check
+7. return the file only once it passes</pre></div>
+
+      <p>The model's raw capacity to reason about a P&amp;L statement hasn't changed between A and B. What changed is that B has a bus (it can execute and persist) and B has cooling (it inspects its own output before calling the job done). A never even notices the arithmetic error, because nothing in A's loop ever looks.</p>
+    </div>
+
+    <hr class="divider">
+
+    <div id="s7">
+      <div class="section-accent"><span class="section-num">07</span></div>
+      <h2 class="section-heading">Cooling Is the Verification Loop</h2>
+      <p>Push the analogy one step further, because it holds up better than it has any right to. A throttling CPU doesn't throw an error. It degrades quietly and keeps returning results — just slower, worse results, with no flag raised. That is precisely the failure mode of an agent with tool access but no verification step: it doesn't crash on a broken workbook. It hands you the broken workbook, confidently, because nothing in its loop was built to notice.</p>
+
+      <blockquote class="pullquote">
+        Tool access expands what an agent can attempt. Verification is what tells it — and you — whether the attempt actually worked.
+      </blockquote>
+
+      <p>This is also the fullest sense of Alan Kay's line. Owning your hardware was never just about having more peripherals bolted on — it was about controlling the parts that determine whether the system is trustworthy under load. For a generative system, that trust can't come from the model alone, because Section 2 already established that the model's output isn't a fixed thing you get to test once. The verification loop is the harness builder's version of building your own hardware: it's the part nobody else will build for you, and it's the part that decides whether “it has shell access” means anything at all.</p>
+    </div>
+
+    <hr class="divider">
+
+    <div id="s8">
+      <div class="section-accent"><span class="section-num">08</span></div>
+      <h2 class="section-heading">What to Actually Compare</h2>
+      <p>“Same LLM” answers exactly one question, and it's rarely the one that matters for a checkable artifact like a spreadsheet. When comparing products like Claude Code, Cursor, Copilot, or Codex, the model is the first question — not the only one. The full comparison, at the harness layer:</p>
+
+      <div class="matrix">
+        <div class="matrix-header cols-3">
+          <div>Layer</div><div>CPU Analogy</div><div>What It Actually Decides</div>
+        </div>
+        <div class="matrix-row cols-3">
+          <div class="label">Model</div><div>The die itself</div><div>Reasoning ceiling — identical if the weights are identical</div>
+        </div>
+        <div class="matrix-row cols-3">
+          <div class="label">Context</div><div>RAM &amp; bandwidth</div><div>How much and what context actually reaches the model</div>
+        </div>
+        <div class="matrix-row cols-3">
+          <div class="label">Retrieval</div><div>Cache / prefetch logic</div><div>How relevant files and code get selected into that context</div>
+        </div>
+        <div class="matrix-row cols-3">
+          <div class="label">Tools</div><div>Storage / I/O bus</div><div>Shell, filesystem, browser, Git, MCP, APIs — what's reachable at all</div>
+        </div>
+        <div class="matrix-row cols-3">
+          <div class="label">Execution</div><div>Instruction pipeline</div><div>Whether generated code can actually run, not just be shown</div>
+        </div>
+        <div class="matrix-row cols-3">
+          <div class="label">Agent loop</div><div>Motherboard / scheduler</div><div>Whether it can observe → reason → act repeatedly, or gets one shot</div>
+        </div>
+        <div class="matrix-row cols-3">
+          <div class="label">Verification</div><div>Cooling &amp; sensors</div><div>Whether it runs tests or validates artifacts before calling it done</div>
+        </div>
+        <div class="matrix-row cols-3">
+          <div class="label">Permissions</div><div>Power delivery limits</div><div>What it's actually allowed to modify or execute</div>
+        </div>
+        <div class="matrix-row cols-3">
+          <div class="label">Memory</div><div>Persistent storage</div><div>What survives and gets retained across separate tasks</div>
+        </div>
+        <div class="matrix-row cols-3">
+          <div class="label">UX</div><div>Case / form factor</div><div>IDE vs. terminal vs. chat — how you actually drive the loop</div>
+        </div>
+        <div class="matrix-row cols-3">
+          <div class="label">Cost / latency</div><div>Clock &amp; power draw</div><div>Tokens, caching, tool-call count, inference speed</div>
+        </div>
+        <div class="matrix-row cols-3">
+          <div class="label">Reliability</div><div>MTBF / error recovery</div><div>How gracefully the orchestration handles a failed step</div>
+        </div>
+      </div>
+
+      <blockquote class="pullquote">
+        Yes, but the LLM is only the reasoning engine. The difference is in context engineering, tool access, execution environment, orchestration, agent loops, verification, and the way the product converts model output into real-world actions.
+      </blockquote>
+
+      <p>That's the technically strong response to “but the underlying LLMs are the same” — and it's every layer in the table above, not just the analogy this piece opened with.</p>
+
+      <div class="callout">
+        <div class="callout-head">Run this before the next “but it's the same model” comes up</div>
+        <ul>
+          <li>Can it execute what it generates, or only describe it?</li>
+          <li>Does anything re-open the artifact and check it before calling the task done?</li>
+          <li>What context does it actually receive — the whole picture, or a fragment?</li>
+          <li>Does it get one shot, or a loop it can iterate inside?</li>
+          <li>Are the sampling settings tuned for reliability, or left at defaults built for chat?</li>
+        </ul>
+      </div>
+      <p>Answer those five, and you've compared the computer — not just quoted the CPU's spec sheet.</p>
+    </div>
+
+    <div class="closing-section">
+      <p>The die was never the whole machine. It was always the part that's easiest to point at, and the least useful thing to argue about.</p>
+      <p>And for a system whose own output can't be trusted to repeat itself, the systems you build around it isn't optional scaffolding. It's the only place “correct” gets decided at all.</p>
+    </div>
+
+    <div class="closing-banner">
+      <p>“Make your own hardware.”</p>
+      <cite>Kay meant the peripherals. For a generative system, the harness is the peripheral that decides whether the output can be trusted.</cite>
+
+    </div>
+
+      <div class="closing-section">
+          <p>If you lead engineering teams, working on AI enablement (AI Assisted or AI Driven) of engineering systems at scale, or find yourself thinking about building something using Agentic GenAI — I&rsquo;d love to connect. Discussing practical use-cases are far more interesting than simple tech-talks on theoretical system.</p>
+          <p style="font-style:normal; font-size:14px; color: #555550; font-family:  var(--font-mono);">linkedin.com/in/pradeep &nbsp;·&nbsp; Pune, India</p>
+      </div>
+
+  </div>
+</article>
+
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-name">Pradeep A. Dalvi</div>
+    <div class="footer-links">
+      <a href="https://linkedin.com/in/pradeep">LinkedIn</a>
+      <a href="https://github.com/pradeepdalvi">GitHub</a>
+      <a href="https://pradeepdalvi.com/blogs/">All Blogs</a>
+    </div>
+    <div class="footer-copy">© 2026 Pradeep A. Dalvi · All rights reserved</div>
+  </div>
+</footer>
+
+</body>
+</html>
