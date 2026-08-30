@@ -1,76 +1,388 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/html">
-	<head>
-		<!-- Google tag (gtag.js) -->
-		<script async src="https://www.googletagmanager.com/gtag/js?id=G-DQ4TX83NWC"></script>
-		<script>
-			window.dataLayer = window.dataLayer || [];
-			function gtag(){dataLayer.push(arguments);}
-			gtag('js', new Date());
+<html lang="en">
+<head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-DQ4TX83NWC"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
 
-			gtag('config', 'G-DQ4TX83NWC');
-		</script>
-		<title>Pradeep A. Dalvi</title>
-		<link rel="stylesheet" type="text/css" href="/css/main.css">
-		<link rel="icon" type="image/x-icon" href="/favicon.ico">
-		<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
-		<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-		<link rel="icon" type="image/png" sizes="48x48" href="/favicon-48x48.png">
-		<link rel="manifest" href="/manifest.webmanifest" crossOrigin="use-credentials">
-		<meta name="mobile-web-app-capable" content="yes">
-		<meta name="theme-color" content="#fff">
-		<meta name="application-name" content="Pradeep A. Dalvi">
-		<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon-180x180.png">
-		<meta name="apple-mobile-web-app-capable" content="yes">
-		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-		<meta name="apple-mobile-web-app-title" content="Pradeep A. Dalvi">
-	</head>
-	<body>
+    gtag('config', 'G-DQ4TX83NWC');
+  </script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pradeep A. Dalvi — Engineer @ Heart</title>
+  <meta name="description" content="Staff Software Engineer · Distributed Systems · Resilience Engineering · Data Security" />
 
-		<div class="container">
-			<header>
-				<h1>Pradeep A. Dalvi</h1>
-				<nav>
-					<ul>
-						<li><a href="/" style="text-decoration:none">Home</a></li>
-						<li><a href="/blogs/" style="text-decoration:none">Blogs</a></li>
-					</ul>
-				</nav>
-			</header>
-    		<div class="blurb">
-        		<h2>Hello World!</h2>
-				<p>I'm best known as a <em>Computer Engineer</em> or an <em>Engineer @ Heart</em>.</p>
+  <link rel="stylesheet" type="text/css" href="/css/main.css">
+  <link rel="icon" type="image/x-icon" href="/favicon.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="48x48" href="/favicon-48x48.png">
+  <link rel="manifest" href="/manifest.webmanifest" crossOrigin="use-credentials">
+  <meta name="application-name" content="Pradeep A. Dalvi">
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon-180x180.png">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Pradeep A. Dalvi">
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+  <style>
 
-				<p class="c9">
-					<em>Twenty-two years</em> in, and I still get a quiet thrill when a distributed system holds steady under pressure. No war room. No escalation. Just the system doing exactly what it was designed to do. That feeling never gets old.
-				</p>
-				<p class="c9">
-					My career has been a long, deliberate journey through the stack - from writing <em>4G/10G Linux network device driver</em> in the kernel, to building a <em>PCI-compliant Payment Gateway from scratch</em>, to architecting a <em>scheduling engine that fired 60 million time-sensitive reminders daily for 150M users.</em> The common thread across all of it: I like being in the code, close to the problem, where the real decisions get made.
-				</p>
-				<p class="c9">
-					I'm a committed <em>Individual Contributor - not by default, but by choice</em>. I've found that the best leverage I have is staying technically deep while thinking architecturally wide. People management is a craft I respect enormously; it's just not mine.
-				</p>
-				<p class="c9">
-					I recently joined <em>Cohesity as a Staff Software Engineer</em>, stepping into the <em>data security and resilience</em> space. <i>After nearly a decade building payments infrastructure at PhonePe</i> - where reliability wasn't a feature, it was the product - this felt like a natural evolution. Different domain, same obsession: <em>systems that don't break when it matters most</em>.
-				</p>
-				<p class="c9">
-					Outside work, I write about distributed systems, engineering culture, and the occasional hard lesson at <em><a href="/blogs/">pradeepdalvi.com/blogs</a></em> - usually through analogies involving the human body, because it turns out evolution solved most of our architecture problems first.
-				</p>
-				<p class="c9">
-					If you're thinking about resilience engineering, distributed systems design, or just want to geek out about something low-level - <i>I'm always up for that conversation</i>.
-				</p>
+  </style>
+</head>
+<body>
+  <div class="bg-grid"></div>
+  <div class="orb orb-1"></div>
+  <div class="orb orb-2"></div>
+  <div class="orb orb-3"></div>
+  <canvas id="particles"></canvas>
+  <div class="scanlines"></div>
 
-				<p>Read more about <a href="http://linkedin.com/in/pradeep">my professional profile...</a></p>
-    		</div><!-- /.blurb -->
+  <div class="wrapper">
+    <nav>
+      <div class="nav-inner">
+        <a href="#home" class="logo">
+          <span class="logo-dot"></span>
+          Pradeep A. Dalvi
+        </a>
+        <div class="nav-links">
+          <a href="#home" class="active">Home</a>
+          <a href="#blogs">Blogs</a>
+          <a href="#connect">Connect</a>
+        </div>
+      </div>
+    </nav>
 
-			<footer>
-				<ul>
-					<li><a href="https://linkedin.com/in/pradeep" style="text-decoration:none"><span style="overflow: hidden; display: inline-block; margin: 0.00px 0.00px; border: 0.00px solid #000000; transform: rotate(0.00rad) translateZ(0px); -webkit-transform: rotate(0.00rad) translateZ(0px); width: 12.60px; height: 12.60px;"><img alt="" src="images/image5.png" style="width: 12.60px; height: 12.60px; margin-left: -0.00px; margin-top: -0.00px; transform: rotate(0.00rad) translateZ(0px); -webkit-transform: rotate(0.00rad) translateZ(0px);" title=""></span><span class="c19"> / pradeep</span> </a></li>
-					<li><a href="https://github.com/pradeepdalvi" style="text-decoration:none"><span style="overflow: hidden; display: inline-block; margin: 0.00px 0.00px; border: 0.00px solid #000000; transform: rotate(0.00rad) translateZ(0px); -webkit-transform: rotate(0.00rad) translateZ(0px); width: 12.60px; height: 12.60px;"><img alt="" src="images/image4.png" style="width: 12.60px; height: 12.60px; margin-left: -0.00px; margin-top: -0.00px; transform: rotate(0.00rad) translateZ(0px); -webkit-transform: rotate(0.00rad) translateZ(0px);" title=""></span><span class="c19"> / pradeepdalvi</span></a></li>
-					<li><a href="https://pradeepdalvi.com" style="text-decoration:none">&copy; Pradeep A. Dalvi</a></li>
-				</ul>
-			</footer>
-		</div><!-- /.container -->
+    <header class="hero" id="home">
+      <div class="badge">Staff Software Engineer · Cohesity</div>
+      <h1 class="glitch glitch-burst" data-text="Hello, World.">Hello, World.</h1>
+      <p class="subtitle">Computer Engineer · Engineer @ Heart · Individual Contributor by choice</p>
+      <div class="typing-wrap">
+        <span id="typed"></span><span class="cursor"></span>
+      </div>
+      <div class="terminal">
+        <div class="terminal-line">
+          <span class="prompt">~/systems $</span>
+          <span class="cmd">uptime — 22 years and still shipping</span>
+        </div>
+      </div>
+    </header>
 
-	</body>
+    <div class="stats" id="stats">
+      <div class="stat">
+        <div class="stat-value">22+</div>
+        <div class="stat-label">Years in systems</div>
+      </div>
+      <div class="stat">
+        <div class="stat-value">60M</div>
+        <div class="stat-label">Daily reminders</div>
+      </div>
+      <div class="stat">
+        <div class="stat-value">150M</div>
+        <div class="stat-label">Users scaled</div>
+      </div>
+    </div>
+
+    <section class="card" data-animate>
+      <p>
+        Twenty-two years in, and I still get a quiet thrill when a <span class="hl-accent">distributed system</span> holds steady under pressure. No war room. No escalation. Just the system doing exactly what it was designed to do. That feeling never gets old.
+      </p>
+      <p>
+        My career has been a long, deliberate journey through the stack — from writing <span class="hl">4G/10G Linux network device drivers</span> in the kernel, to building a <span class="hl">PCI-compliant Payment Gateway from scratch</span>, to architecting a <span class="hl-green">scheduling engine that fired 60 million time-sensitive reminders daily for 150M users</span>. The common thread: I like being in the code, close to the problem, where the real decisions get made.
+      </p>
+    </section>
+
+    <section class="card" data-animate>
+      <p>
+        I'm a committed <span class="hl-purple">Individual Contributor — not by default, but by choice</span>. I've found that the best leverage I have is staying technically deep while thinking architecturally wide. People management is a craft I respect enormously; it's just not mine.
+      </p>
+      <p>
+        I recently joined <span class="hl-accent">Cohesity as a Staff Software Engineer</span>, stepping into the <span class="hl">data security and resilience</span> space. After nearly a decade building payments infrastructure at <span class="hl">PhonePe</span> — where reliability wasn't a feature, it was the product — this felt like a natural evolution. Different domain, same obsession: <span class="hl-green">systems that don't break when it matters most</span>.
+      </p>
+    </section>
+
+    <section data-animate>
+      <h2 class="section-title"><span class="glitch-text glitch-burst" data-text="Journey">Journey</span></h2>
+      <div class="card">
+        <div class="journey">
+          <div class="journey-item">
+            <div class="journey-title">Kernel & Drivers</div>
+            <div class="journey-desc">4G/10G Linux network device drivers — close to the metal</div>
+          </div>
+          <div class="journey-item">
+            <div class="journey-title">Payments Infrastructure</div>
+            <div class="journey-desc">PCI-compliant Payment Gateway from scratch · PhonePe (~10 yrs)</div>
+          </div>
+          <div class="journey-item">
+            <div class="journey-title">Scale & Scheduling</div>
+            <div class="journey-desc">60M time-sensitive reminders/day for 150M users</div>
+          </div>
+          <div class="journey-item">
+            <div class="journey-title">Data Security & Resilience</div>
+            <div class="journey-desc">Staff Software Engineer @ Cohesity — systems that hold under pressure</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="blogs" data-animate>
+      <h2 class="section-title"><span class="glitch-text glitch-burst" data-text="Writing">Writing</span></h2>
+      <div class="card">
+        <p style="margin-bottom: 1.5rem;">
+          I write about distributed systems, engineering culture, and the occasional hard lesson — usually through analogies involving the human body, because evolution solved most of our architecture problems first.
+        </p>
+
+        <div class="blog-group">
+          <div class="blog-group-label">Latest</div>
+          <ul class="blog-list">
+            <li>
+              <a href="https://pradeepdalvi.com/blogs/same-llm-different-harness" target="_blank" rel="noopener">
+                <span class="blog-date">Aug 2026</span>
+                <span class="blog-title">Same LLM, Different Harness. <span>The model was never the whole product.</span></span>
+              </a>
+            </li>
+            <li>
+              <a href="https://pradeepdalvi.com/blogs/concurrent-vs-parallel" target="_blank" rel="noopener">
+                <span class="blog-date">Jul 2026</span>
+                <span class="blog-title">Concurrent Doesn't Mean Parallel. <span>And parallel doesn't mean fast.</span></span>
+              </a>
+            </li>
+            <li>
+              <a href="https://pradeepdalvi.com/blogs/the-pressure-keeps-coming" target="_blank" rel="noopener">
+                <span class="blog-date">Jul 2026</span>
+                <span class="blog-title">The Pressure Keeps Coming. <span>When it does, is your system resilient enough?</span></span>
+              </a>
+            </li>
+          </ul>
+        </div>
+
+        <div class="blog-group">
+          <div class="blog-group-label">Recent</div>
+          <ul class="blog-list">
+            <li>
+              <a href="https://pradeepdalvi.com/blogs/being-oncall" target="_blank" rel="noopener">
+                <span class="blog-date">May 2026</span>
+                <span class="blog-title">Being OnCall. <span>Expect the unexpected, while hoping for none.</span></span>
+              </a>
+            </li>
+            <li>
+              <a href="https://pradeepdalvi.com/blogs/the-unseen-punch" target="_blank" rel="noopener">
+                <span class="blog-date">May 2026</span>
+                <span class="blog-title">The Unseen Punch. <span>“In a boxing ring, the punch that hurts you the most is the one that you don’t see coming.”</span></span>
+              </a>
+            </li>
+            <li>
+              <a href="https://pradeepdalvi.com/blogs/the-user-cohort-fallacy" target="_blank" rel="noopener">
+                <span class="blog-date">May 2026</span>
+                <span class="blog-title">The User Cohort Fallacy. <span>“Debit card users just don’t complete transactions.”</span></span>
+              </a>
+            </li>
+          </ul>
+        </div>
+
+        <div class="blog-group" style="margin-bottom: 0;">
+          <div class="blog-group-label">Older</div>
+          <ul class="blog-list">
+            <li>
+              <a href="https://pradeepdalvi.com/blogs/engineered-in-our-dna" target="_blank" rel="noopener">
+                <span class="blog-date">2024</span>
+                <span class="blog-title">Engineered in Our DNA. <span>How Nature is the Ultimate Systems Architect</span></span>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="cta card" id="connect" data-animate>
+      <p>
+        If you're thinking about <span class="hl-accent">resilience engineering</span>, <span class="hl">distributed systems design</span>, or just want to geek out about something low-level — <span class="hl-green">I'm always up for that conversation</span>.
+      </p>
+      <div class="btn-row">
+        <a class="btn btn-primary" href="https://linkedin.com/in/pradeep" target="_blank" rel="noopener">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+          LinkedIn
+        </a>
+        <a class="btn btn-ghost" href="https://pradeepdalvi.com/blogs" target="_blank" rel="noopener">
+          Read the blogs →
+        </a>
+      </div>
+    </section>
+
+    <footer>
+      <div class="footer-links">
+        <a href="https://linkedin.com/in/pradeep" target="_blank" rel="noopener">LinkedIn</a>
+        <a href="https://pradeepdalvi.com" target="_blank" rel="noopener">Original site</a>
+      </div>
+      <p>© 2026 Pradeep A. Dalvi · Redesign concept · Systems that don't break when it matters most</p>
+    </footer>
+  </div>
+
+  <script>
+    // Typing effect
+    const phrases = [
+      "systems that don't break when it matters most",
+      "technically deep · architecturally wide",
+      "resilience engineering · distributed systems",
+      "Individual Contributor by choice"
+    ];
+    let phraseIndex = 0;
+    let charIndex = 0;
+    let isDeleting = false;
+    const typedEl = document.getElementById('typed');
+
+    function type() {
+      const current = phrases[phraseIndex];
+      if (isDeleting) {
+        typedEl.textContent = current.substring(0, charIndex - 1);
+        charIndex--;
+      } else {
+        typedEl.textContent = current.substring(0, charIndex + 1);
+        charIndex++;
+      }
+
+      let delay = isDeleting ? 28 : 55;
+
+      if (!isDeleting && charIndex === current.length) {
+        delay = 2200;
+        isDeleting = true;
+      } else if (isDeleting && charIndex === 0) {
+        isDeleting = false;
+        phraseIndex = (phraseIndex + 1) % phrases.length;
+        delay = 400;
+      }
+
+      setTimeout(type, delay);
+    }
+    setTimeout(type, 800);
+
+    // Scroll reveal + fade out when leaving viewport
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          entry.target.classList.remove('fading-out');
+        } else if (entry.target.classList.contains('visible')) {
+          // Soft fade when scrolling past (only for content sections)
+          if (entry.boundingClientRect.top < 0) {
+            entry.target.classList.add('fading-out');
+          }
+        }
+      });
+    }, { threshold: [0, 0.12, 0.25], rootMargin: '0px 0px -30px 0px' });
+
+    document.querySelectorAll('[data-animate]').forEach(el => observer.observe(el));
+
+    // Stats fade-in
+    const statsEl = document.getElementById('stats');
+    if (statsEl) {
+      const statsObs = new IntersectionObserver((entries) => {
+        entries.forEach(e => {
+          if (e.isIntersecting) e.target.classList.add('visible');
+        });
+      }, { threshold: 0.2 });
+      statsObs.observe(statsEl);
+    }
+
+    // Active nav
+    const sections = document.querySelectorAll('section[id], header[id]');
+    const navLinks = document.querySelectorAll('.nav-links a');
+
+    window.addEventListener('scroll', () => {
+      let current = '';
+      sections.forEach(section => {
+        const top = section.offsetTop - 100;
+        if (scrollY >= top) current = section.getAttribute('id');
+      });
+      navLinks.forEach(link => {
+        link.classList.remove('active');
+        if (link.getAttribute('href') === '#' + current) link.classList.add('active');
+      });
+    });
+
+    // ─── Matrix-style alphanumeric rain (denser + slower) ───
+    const canvas = document.getElementById('particles');
+    const ctx = canvas.getContext('2d');
+
+    // Mix of Latin, digits, and symbols (Matrix-like)
+    const CHARS = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz@#$%&*+=<>?/\\|[]{}~';
+    // Smaller font + tighter spacing = higher density
+    const FONT_SIZE = 12;
+    let columns = [];
+    let drops = [];
+
+    function resize() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+      // denser columns
+      const colCount = Math.floor(canvas.width / (FONT_SIZE * 0.72));
+      columns = [];
+      drops = [];
+      for (let i = 0; i < colCount; i++) {
+        drops[i] = Math.random() * -60;
+        columns[i] = {
+          // slower fall
+          speed: 0.12 + Math.random() * 0.28,
+          trail: 12 + Math.floor(Math.random() * 18)
+        };
+      }
+    }
+    resize();
+    window.addEventListener('resize', resize);
+
+    function drawMatrix() {
+      // Slightly stronger fade so trails linger longer at slow speed
+      ctx.fillStyle = 'rgba(5, 7, 10, 0.08)';
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+      ctx.font = `${FONT_SIZE}px "JetBrains Mono", monospace`;
+      ctx.textAlign = 'center';
+
+      for (let i = 0; i < drops.length; i++) {
+        const x = i * FONT_SIZE * 0.72 + FONT_SIZE / 2;
+        const y = drops[i] * FONT_SIZE;
+
+        // Head character — brightest cyan
+        const headChar = CHARS[Math.floor(Math.random() * CHARS.length)];
+        ctx.fillStyle = 'rgba(180, 255, 255, 0.92)';
+        ctx.shadowColor = 'rgba(0, 229, 255, 0.7)';
+        ctx.shadowBlur = 6;
+        ctx.fillText(headChar, x, y);
+        ctx.shadowBlur = 0;
+
+        // Longer trails
+        const trailLen = columns[i].trail;
+        for (let t = 1; t < trailLen; t++) {
+          const trailY = y - t * FONT_SIZE;
+          if (trailY < 0) continue;
+          const char = CHARS[Math.floor(Math.random() * CHARS.length)];
+          const alpha = Math.max(0, 0.5 - t * 0.028);
+          const g = Math.floor(160 + (1 - t / trailLen) * 50);
+          ctx.fillStyle = `rgba(0, ${g}, ${Math.floor(190 + alpha * 55)}, ${alpha})`;
+          ctx.fillText(char, x, trailY);
+        }
+
+        drops[i] += columns[i].speed;
+
+        if (y > canvas.height + trailLen * FONT_SIZE) {
+          // reset less aggressively so columns stay denser on screen
+          if (Math.random() > 0.985) {
+            drops[i] = -Math.random() * 30;
+            columns[i].speed = 0.12 + Math.random() * 0.28;
+            columns[i].trail = 12 + Math.floor(Math.random() * 18);
+          }
+        }
+      }
+
+      requestAnimationFrame(drawMatrix);
+    }
+
+    ctx.fillStyle = '#05070a';
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+    drawMatrix();
+  </script>
+</body>
 </html>
