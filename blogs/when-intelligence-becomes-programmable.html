@@ -44,9 +44,30 @@
   .matrix-header.cols-2,
   .matrix-row.cols-2    { grid-template-columns: 2fr 2fr; }
 
+  .matrix-header.cols-22,
+  .matrix-row.cols-22    { grid-template-columns: 0.5fr 3fr; }
+
   .matrix-row div {color: var(--color-text-secondary); font-size: 16px;}
+
+  .sources {
+    margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid var(--color-border, #2e2e2e);
+  }
+
+  .sources ol {
+    font-size: 0.9rem; color: var(--color-text-secondary); line-height: 1.6; margin-left: 1.5rem;
+  }
+
+  .sources a {
+    font-size: 13px;
+    color: var(--color-text-info);
+    text-decoration: none;
+    letter-spacing: 0.03em;
+    transition: color 0.2s;
+  }
+  .sources a:hover { color: var(--color-text-info-light); }
 </style>
   <title>When Intelligence Becomes Programmable | Blogs — Pradeep A. Dalvi</title>
+  <meta name="description" content="Productivity demands adaptability, adaptability demands confidence, confidence demands control. Why agentic AI needs better change management.">
 </head>
 <body>
 <!-- ── NAV ─────────────────────────────────────────────── -->
@@ -65,14 +86,14 @@
   <div class="hero-tags">
     <span class="tag tag-arch">AI Engineering</span>
     <span class="tag tag-payments">Agentic AI</span>
-    <span class="tag tag-resilience">Software Governance</span>
+    <span class="tag tag-resilience">Change Management</span>
     <span class="tag-sep">·</span>
     <span class="tag-date">October 2026</span>
   </div>
 
-<h1 class="hero-title">When Intelligence Becomes Programmable. <em>Why agentic AI needs better governance.</em></h1>
+<h1 class="hero-title">When Intelligence Becomes Programmable. <em>Why agentic AI needs better change management.</em></h1>
 
-<div class="hero-deck">"If you define the problem correctly, you almost have the solution" <cite>— Steve Jobs</cite></div>
+<div class="hero-deck">Productivity demands adaptability. Adaptability demands confidence. Confidence demands control.</div>
 
   <div class="author-strip">
     <div class="avatar"><img src="/images/actor_thumbnail.jpeg" class="thumbnail" alt="PD"/></div>
@@ -80,7 +101,7 @@
       <div class="author-name">Pradeep A. Dalvi</div>
       <div class="author-role">Principal Systems Architect · Distributed Systems &amp; Payments</div>
     </div>
-    <div class="read-time">8 min read</div>
+    <div class="read-time">9 min read</div>
   </div>
 </div>
 
@@ -90,20 +111,20 @@
 
 <div class="pillar-grid" style="grid-template-columns: repeat(4, 1fr);">
   <div class="pillar-card">
-    <h4 style="color: var(--color-text-primary);"> <span class="pillar-icon"  style="font-size: 1rem;">💭</span> Intent</h4>
-    <p style="color: var(--color-text-secondary);">Which problem is being solved, and what “correct” means for this ticket, in this codebase, under these constraints.</p>
+    <h4 style="color: var(--color-text-primary);"> <span class="pillar-icon"  style="font-size: 1rem;">👁</span> Observability / SEE</h4>
+    <p style="color: var(--color-text-secondary);">What was assumed, decided and built, readable by anyone who was not in the room.</p>
   </div>
   <div class="pillar-card">
-    <h4 style="color: var(--color-text-danger);"><span class="pillar-icon"  style="font-size: 1.2rem;">✺</span> Decisioning</h4>
-    <p style="color: var(--color-text-secondary);">Which approach was chosen, by whom, and why. A named person, not a Slack thread.</p>
+    <h4 style="color: var(--color-text-danger);"><span class="pillar-icon"  style="font-size: 1.2rem;">✺</span> Experimentation / TRY</h4>
+    <p style="color: var(--color-text-secondary);">Compare approaches and test changes cheaply, in isolation, before committing to one.</p>
   </div>
   <div class="pillar-card">
-    <h4 style="color: var(--color-text-info); "><span class="pillar-icon"  style="font-size: 1.2rem;">✧</span> Scope</h4>
-    <p style="color: var(--color-text-secondary);">What is in, what is explicitly out, and which ticket every deferred item moves to.</p>
+    <h4 style="color: var(--color-text-info); "><span class="pillar-icon"  style="font-size: 1.2rem;">✧</span> Control / DECIDE</h4>
+    <p style="color: var(--color-text-secondary);">A named person decides, with limits on what the agent does alone and clear stop conditions.</p>
   </div>
   <div class="pillar-card">
-    <h4 style="color: var(--color-text-warning); "><span class="pillar-icon"  style="font-size: 1.2rem;">⚡</span> Verification</h4>
-    <p style="color: var(--color-text-secondary);">The tests and verification that show the code matches what was agreed, before anyone reviews it.</p>
+    <h4 style="color: var(--color-text-warning); "><span class="pillar-icon"  style="font-size: 1.2rem;">⚡</span> Evidence / PROVE</h4>
+    <p style="color: var(--color-text-secondary);">Proof that the change matches what was agreed, before anyone reviews the code.</p>
   </div>
 </div>
 
@@ -112,12 +133,13 @@
   <ol>
     <li><a href="#s1">The Pattern Behind Every Wave</a></li>
     <li><a href="#s2">The Agent Can Generate the Code</a></li>
-    <li><a href="#s3">The Missing Layer: Change Management</a></li>
-    <li><a href="#s4">The Real Bottleneck Is Not Code Generation</a></li>
-    <li><a href="#s5">A Tracker-Anchored Workflow</a></li>
-    <li><a href="#s6">Why This Matters</a></li>
-    <li><a href="#s7">The Shift in the Engineer’s Job</a></li>
-    <li><a href="#s8">What Will Become Obsolete</a></li>
+    <li><a href="#s3">Productivity Runs on Confidence</a></li>
+    <li><a href="#s4">The Missing Layer: Change Management</a></li>
+    <li><a href="#s5">Where Confidence Leaks</a></li>
+    <li><a href="#s6">A Tracker-Anchored Workflow</a></li>
+    <li><a href="#s7">Why This Matters</a></li>
+    <li><a href="#s8">The Shift in the Engineer’s Job</a></li>
+    <li><a href="#s9">What Will Become Obsolete</a></li>
   </ol>
 </nav>
 
@@ -133,11 +155,9 @@
 
 <p>Technological revolutions follow a familiar pattern. An enabling infrastructure appears, capability becomes democratized, network effects compound, applications cascade, and incumbents are disrupted. So I will dare to compare today’s Transformer-backed Generative AI, and the ecosystem growing around it through harnesses and agentic AI, with the revolutions that came before. History does not merely rhyme in technology. It compounds.</p>
 
-<p>The Industrial Revolution multiplied human muscle. Personal computers made computing personal. High-level languages and modern compilers made software expressive. The internet and the dot-com boom made information free to move. Distributed systems like Search, Gmail and Maps made scale reliable. Smartphones made the computer disappear into everyday life.</p>
+<p>The Industrial Revolution multiplied human muscle. Personal computers made computing personal. Compilers made software expressive. The internet made information free to move. Distributed systems made scale reliable. Smartphones made the computer disappear into everyday life. Each wave brought excitement, skepticism and anxiety, and each became the foundation for the next.</p>
 
-<p>Every one of these waves brought excitement, skepticism, disruption and anxiety in its early days. Each shook its industry and, over time, produced positive disruption for people and businesses. Each built on the previous one and became the foundation for the next.</p>
-
-<p>So instead of only asking how powerful AI will become, I find a different question far more interesting: what happens when intelligence becomes programmable, scalable, and increasingly inexpensive? From first engineering principles, every major wave made a previously scarce capability <strong>cheaper, then more accessible, then easier to build upon</strong>.</p>
+<p>So instead of only asking how powerful AI will become, I find a different question more interesting: what happens when intelligence becomes programmable, scalable, and increasingly inexpensive? Every major wave made a previously scarce capability <strong>cheaper, then more accessible, then easier to build upon</strong>.</p>
 
 <blockquote class="pullquote" style="color: var(--color-text-info-light)">The biggest impact of a technological revolution is not necessarily the technology itself. It is everything that gets built on top of it.</blockquote>
 
@@ -149,51 +169,97 @@
 
 <p>Brilliant. And yet I still see many software engineers complaining about the quality of code generated by AI agents. That is often the first stage of grief: denial.</p>
 
-<p>The real issue is rarely that an agent cannot write code. It is that teams ask an agent to write code before the team has made the decisions that make code correct, safe, maintainable and reviewable. AI has made implementation dramatically faster. But specifying intent, choosing an approach, resolving ambiguity, approving scope, verifying behavior and accepting accountability remain human-paced activities.</p>
+<p>The real issue is rarely that an agent cannot write code. It is that teams ask an agent to write code before the team has made the decisions that make code correct, safe, maintainable and reviewable. AI has made implementation dramatically cheaper. But specifying intent, choosing an approach, resolving ambiguity, approving scope, verifying behavior and accepting accountability remain human-paced activities.</p>
 
 <p>That is where the opportunity lies.</p>
 
     <!-- ── 03 ───────────────────────────────────────────── -->
     <div class="section-accent"><span class="section-num">03</span></div>
-    <h2 class="section-heading" id="s3">The Missing Layer: Change Management</h2>
+    <h2 class="section-heading" id="s3">Productivity Runs on Confidence</h2>
+
+<p>Strip the topic down to what a team actually wants and you get one word: productivity. Not lines of code per day, but the ability to ship more of the right changes without breaking what already works. Here is how I now frame the problem, as a chain of demands.</p>
+
+<p><strong>Productivity improvement demands adaptability.</strong> The models, tools, prompts and agent capabilities underneath us change every few months. A team that cannot change how it works as fast as they change is stuck with yesterday’s best practice, or adopts every new thing blindly.</p>
+
+<p><strong>Adaptability demands confidence.</strong> Nobody swaps a model, loosens a review step or lets an agent touch a shared code path unless they believe they will notice if it goes wrong, and can undo it. Without confidence, the rational move is to freeze, and freezing is the opposite of adapting.</p>
+
+<p><strong>Confidence demands control.</strong> Not control as in slower, but control as in knowing who decided, what the agent may do alone, and when it must stop and ask. Control is one of four inputs that together produce confidence.</p>
+
+<figure class="visualization">
+<svg class="flow-svg" viewBox="0 0 700 230" role="img" aria-label="Observability, experimentation, control and evidence lead to confidence, then adaptability, then productivity improvements">
+  <rect class="hot" x="10" y="14"  width="170" height="40" rx="6"/><text x="95" y="39"  text-anchor="middle">Observability</text>
+  <rect class="hot" x="10" y="64"  width="170" height="40" rx="6"/><text x="95" y="89"  text-anchor="middle">Experimentation</text>
+  <rect class="hot" x="10" y="114" width="170" height="40" rx="6"/><text x="95" y="139" text-anchor="middle">Control</text>
+  <rect class="hot" x="10" y="164" width="170" height="40" rx="6"/><text x="95" y="189" text-anchor="middle">Evidence</text>
+  <path class="arrow" d="M180 34L262 99M180 84L262 104M180 134L262 114M180 184L262 119"/>
+  <rect class="box" x="262" y="82" width="120" height="50" rx="8"/><text x="322" y="112" text-anchor="middle">Confidence</text>
+  <path class="arrow" d="M382 107H412"/>
+  <rect class="box" x="412" y="82" width="120" height="50" rx="8"/><text x="472" y="112" text-anchor="middle">Adaptability</text>
+  <path class="arrow" d="M532 107H552"/>
+  <rect class="db" x="552" y="72" width="138" height="70" rx="8"/><text x="621" y="103" text-anchor="middle">Productivity</text><text x="621" y="121" text-anchor="middle">improvements</text>
+</svg>
+<figcaption>Figure 2: Four inputs produce confidence. Confidence makes adaptation safe. Adaptation is what sustains productivity gains.</figcaption>
+</figure>
+
+<p>Read it from the left. If you can <strong>see</strong> what happened and why (observability), <strong>try</strong> another approach cheaply and safely (experimentation), <strong>decide</strong> with names, limits and stop conditions (control), and <strong>prove</strong> the change does what was agreed (evidence), you get confidence. Confidence is what lets a team adapt without fear. Adaptability is what keeps productivity gains from decaying the moment the tooling shifts.</p>
+
+<blockquote class="pullquote">Speed is easy to buy. Confidence is what makes it repeatable.</blockquote>
+
+    <!-- ── 04 ───────────────────────────────────────────── -->
+    <div class="section-accent"><span class="section-num">04</span></div>
+    <h2 class="section-heading" id="s4">The Missing Layer: Change Management</h2>
 
 <p>High-level SDLC diagrams are useful, but they do not tell an AI agent what “correct” means for this ticket, in this codebase, under these constraints. That is a different layer, and it is the one that is missing.</p>
 
 <div class="defn-block">
   <span class="defn-label" style="color: var(--color-text-info)">Agent = Model + Harness</span>
-  <div class="defn-body">The model provides reasoning and generation.<br/>The harness provides instructions, tools, guardrails, tests, feedback loops, observability and, critically, the decisions that constrain the work.<br/>The framing comes from Google’s 2026 whitepaper on the new SDLC with vibe coding.</div>
+  <div class="defn-body">The model provides reasoning and generation.<br/>The harness provides instructions, tools, guardrails, tests, feedback loops, observability and, critically, the decisions that constrain the work.<br/>The framing comes from the Google whitepaper <em>The New SDLC With Vibe Coding</em> (Osmani, Saboo and Kartakis, May 2026).</div>
 </div>
 
-<p>A change-management workflow is part of that harness. A note on the term: I mean it in the engineering sense of governing one change through its lifecycle, not the ITIL sense of organisation-wide change enablement. ITIL asks whether a change may enter production. This asks whether a change was decided, planned, built and verified as agreed.</p>
-
-<p>Concretely, the workflow tells the agent what problem is being solved, which approach was chosen and by whom, what is in scope and what is explicitly out, which assumptions must be validated, which questions block implementation, what tests prove the change works, and when a human must stop the machine and decide.</p>
+<p>A change-management workflow is the part of that harness that supplies the four inputs. A note on the term: I mean it in the engineering sense of governing one change through its lifecycle, not the ITIL sense of organisation-wide change enablement. ITIL asks whether a change may enter production. This asks whether a change was decided, planned, built and verified as agreed.</p>
 
 <div class="callout">
   <div class="callout-head">The tell</div>
   <p>Without this layer, AI-generated code can look impressive while quietly encoding the wrong assumption.</p>
 </div>
 
-    <!-- ── 04 ───────────────────────────────────────────── -->
-    <div class="section-accent"><span class="section-num">04</span></div>
-    <h2 class="section-heading" id="s4">The Real Bottleneck Is Not Code Generation</h2>
+    <!-- ── 05 ───────────────────────────────────────────── -->
+    <div class="section-accent"><span class="section-num">05</span></div>
+    <h2 class="section-heading" id="s5">Where Confidence Leaks</h2>
 
-<p>Many teams discover the same recurring gaps. Assumptions behind generated code never reach the tracker. Changes arrive at review without a named person having approved the approach or scope. Implementation begins while the approach is still being debated. Decisions live in Slack threads, meetings and people’s heads rather than in the ticket.</p>
+<p>I went back through my team’s recent tickets, code reviews and review comments to see what kept going wrong with AI-assisted changes. This was a retrospective reading, not a counted sample, but the same ten gaps kept recurring. Mapped onto the four inputs, they stop looking like a random list and start looking like four leaks.</p>
 
-<p>Then the second half. Plans drift from the code that was actually written. Open questions have no owner or severity, so they resurface during code review. Deferred work disappears, only to return later as an incident. Design problems are discovered late, in review rather than before implementation. And the reports that do exist are long, generic, code-heavy “AI output” that reviewers and leaders cannot use.</p>
+<div class="matrix">
+  <div class="matrix-header cols-22">
+    <div>Input</div><div>When it is missing</div>
+  </div>
+  <div class="matrix-row cols-22">
+    <div class="label">Observability</div><div>Assumptions behind generated code never reach the tracker. Decisions live in Slack threads, meetings and people’s heads. Reports are long, generic, code-heavy “AI output” that leaders and support cannot use.</div>
+  </div>
+  <div class="matrix-row cols-22">
+    <div class="label">Experimentation</div><div>Design problems surface late, in code review, instead of before implementation. Setup (worktrees, gates, commit messages) is manual, so every trial is expensive.</div>
+  </div>
+  <div class="matrix-row cols-22">
+    <div class="label">Control</div><div>Changes reach review without a named person having approved approach and scope. Implementation starts while the approach is still being debated. Open questions have no owner or severity.</div>
+  </div>
+  <div class="matrix-row cols-22">
+    <div class="label">Evidence</div><div>Plans drift from the code that was actually written. Deferred work disappears, then returns as an incident.</div>
+  </div>
+</div>
 
-<p>These are not model-quality problems alone. They are process and governance problems.</p>
+<p>These are not model-quality problems alone. They are process and governance problems, and each one makes a team a little less willing to change anything.</p>
 
 <blockquote class="pullquote">When implementation becomes cheap, the scarce asset becomes the record of why a change was made, by whose decision, and against which requirements.</blockquote>
 
-    <!-- ── 05 ───────────────────────────────────────────── -->
-    <div class="section-accent"><span class="section-num">05</span></div>
-    <h2 class="section-heading" id="s5">A Tracker-Anchored Workflow</h2>
+    <!-- ── 06 ───────────────────────────────────────────── -->
+    <div class="section-accent"><span class="section-num">06</span></div>
+    <h2 class="section-heading" id="s6">A Tracker-Anchored Workflow</h2>
 
 <p>One practical approach is to treat a tracker ticket as the unit of governance. Each stage of the change produces a durable, structured record on the ticket. The next stage reads that record before proceeding. The agent does the mechanical work; humans make the decisions that require judgment.</p>
 
 <figure>
   <img src="/images/ai_change_management.png" style="height: 360px;" alt="Eight workflow stages, each posting a record to and reading from the tracker ticket">
-  <figcaption>Figure 2: Every stage leaves a record on the ticket; the next one starts by reading it back. Implement (orange) is where source actually changes.</figcaption>
+  <figcaption>Figure 3: Every stage leaves a record on the ticket; the next one starts by reading it back. Implement (orange) is where source actually changes.</figcaption>
 </figure>
 
     <div class="matrix">
@@ -218,26 +284,28 @@
       <div class="matrix-row cols-3">
         <div class="label">Review</div><div>Is the code ready for external review?</div><div>Author self-assessment</div>
       </div>
-
       <div class="matrix-row cols-3">
         <div class="label">Submit</div><div>Commit and push the reviewed change</div><div>Commit, changelog, submitted patch</div>
       </div>
-
       <div class="matrix-row cols-3">
         <div class="label">Incorporate</div><div>How do we address external review?</div><div>Fixes, replies, verification, next patch</div>
       </div>
 </div>
 
-<p>The agent can prepare options, draft plans, run tests, apply gates, generate commit messages and summarize evidence. But approach selection, approval, scope changes, Critical questions, commits and pushes should wait for a named person.</p>
+<p>Each of the four inputs has a home in this flow. The ticket itself is the <strong>observability</strong>: every stage posts a record anyone can read. Assess and an isolated workspace per ticket give <strong>experimentation</strong>: options are compared before one is chosen, and trials are cheap to set up and throw away. Confirm and the stop conditions are the <strong>control</strong>: a named person decides, a Critical question cannot be skipped, and commits and pushes wait for a human. Plan’s acceptance mapping and Verify’s conformance check are the <strong>evidence</strong>: the code is judged against what was agreed before it is judged on how it was written.</p>
 
 <div class="callout">
   <div class="callout-head">The principle</div>
-  <p><strong>Humans decide; agents implement.</strong></p>
+  <p><strong>Humans decide; agents implement.</strong> The agent can prepare options, draft plans, run tests, apply gates, generate commit messages and summarize evidence. Approach selection, approval, scope changes, Critical questions, commits and pushes wait for a named person.</p>
 </div>
 
-    <!-- ── 06 ───────────────────────────────────────────── -->
-    <div class="section-accent"><span class="section-num">06</span></div>
-    <h2 class="section-heading" id="s6">Why This Matters</h2>
+<h3>Where this stands</h3>
+
+<p>I want to be direct about the evidence. I have run this workflow end to end on one ticket, as its author. There are no measured results yet, so what follows is a plan, not an evaluation. I would pilot it on a few live tickets and read four numbers from the tracker: rework cycles per ticket, review rounds before approval, deferred items that reach a tracker versus those rediscovered later, and elapsed time from assessment to a pushed change. If review rounds and rework do not rise and every deferral has a ticket, continue. If deciders find the confirmation step slower than the conversation it replaces, stop and revise.</p>
+
+    <!-- ── 07 ───────────────────────────────────────────── -->
+    <div class="section-accent"><span class="section-num">07</span></div>
+    <h2 class="section-heading" id="s7">Why This Matters</h2>
 
 <p>This is not bureaucracy for its own sake. It is how teams convert AI speed into reliable engineering throughput. Look at the same team, with and without a shared record.</p>
 
@@ -267,26 +335,26 @@
 
 <p>That last row is the one I care about most as a builder. A chat history is a lossy, private, perishable thing. A ticket is none of those.</p>
 
-    <!-- ── 07 ───────────────────────────────────────────── -->
-    <div class="section-accent"><span class="section-num">07</span></div>
-    <h2 class="section-heading" id="s7">The Shift in the Engineer’s Job</h2>
+    <!-- ── 08 ───────────────────────────────────────────── -->
+    <div class="section-accent"><span class="section-num">08</span></div>
+    <h2 class="section-heading" id="s8">The Shift in the Engineer’s Job</h2>
 
 <p>The engineer’s job does not disappear. It moves up the abstraction ladder. Instead of spending most of their time translating intent into syntax, engineers increasingly spend it defining the problem precisely, identifying constraints and risks, comparing approaches, making and recording decisions, designing verification, reviewing evidence rather than just diffs, and owning the outcome.</p>
 
 <p>In other words, the engineer becomes the designer and governor of the system that produces software, not merely the author of every line.</p>
 
-    <!-- ── 08 ───────────────────────────────────────────── -->
-    <div class="section-accent"><span class="section-num">08</span></div>
-    <h2 class="section-heading" id="s8">What Will Become Obsolete</h2>
+    <!-- ── 09 ───────────────────────────────────────────── -->
+    <div class="section-accent"><span class="section-num">09</span></div>
+    <h2 class="section-heading" id="s9">What Will Become Obsolete</h2>
 
-<p>Some specific tools, prompts, workflows and agent capabilities will certainly become obsolete. That is normal. Compilers improved. Frameworks changed. Cloud platforms evolved. Mobile ecosystems matured. The underlying capability persisted and became the foundation for the next layer. The same will happen here.</p>
+<p>Some specific tools, prompts, workflows and agent capabilities will certainly become obsolete. That is normal. Compilers improved. Frameworks changed. Cloud platforms evolved. Mobile ecosystems matured. The underlying capability persisted and became the foundation for the next layer.</p>
 
-<p>The durable ideas are likely to be these: explicit intent, recorded decisions, named accountability, verification before review, guardrails around autonomous action, and a shared, queryable record of why software changed. The exact implementation may change. The need for it will not.</p>
+<p>This is where the chain earns its keep. A team with observability, experimentation, control and evidence can replace a model, a harness or a whole tool next quarter and know within days whether it helped. A team without them can only hope. The durable ideas are likely to be explicit intent, recorded decisions, named accountability, verification before review, guardrails around autonomous action, and a shared, queryable record of why software changed. The exact implementation may change. The need for it will not.</p>
 
     <div class="section-accent"></div>
 <h2 class="section-heading">The Takeaway</h2>
 
-<p>Agentic AI can generate code. That is no longer the hard part. The hard part is ensuring the code represents a decision a responsible human actually made, against requirements that were understood, with assumptions that were examined, and with evidence that the result behaves as intended. That is the work of change management.</p>
+<p>Agentic AI can generate code. That is no longer the hard part. The hard part is ensuring the code represents a decision a responsible human actually made, against requirements that were understood, with assumptions that were examined, and with evidence that the result behaves as intended. That is the work of change management, and it is what turns a one-time speed-up into lasting productivity.</p>
 
 <p>In an era when intelligence becomes programmable, scalable and inexpensive, the teams that win will not simply be the ones that generate the most code.</p>
 
@@ -296,6 +364,14 @@
     <p>If you lead engineering teams working on AI enablement (AI-assisted or AI-driven) of engineering systems at scale, or you are thinking about building something with agentic GenAI, I’d love to connect. Practical use cases are far more interesting than theoretical tech talk.</p>
 
     <p class="contact"  style="font-style:normal; font-size:14px; color: #555550; font-family:  var(--font-mono);">linkedin.com/in/pradeep · Pune, India</p>
+  </div>
+
+  <div class="sources">
+    <h4 style="font-size: 0.95rem; margin-bottom: 0.75rem;">Sources</h4>
+    <ol>
+      <li>A. Osmani, S. Saboo, S. Kartakis. <a href="https://www.kaggle.com/whitepaper-the-new-SDLC-with-vibe-coding"><em>The New SDLC With Vibe Coding: From ad-hoc prompting to Agentic Engineering.</em></a> Google, May 2026.</li>
+      <li>A. Blount et al. <a href="https://www.kaggle.com/whitepaper-introduction-to-agents"><em>Introduction to Agents.</em></a> Google / Kaggle, 2025.</li>
+    </ol>
   </div>
 
 </div>
